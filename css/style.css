@@ -204,8 +204,7 @@ section h2 {
    =========================================================== */
 
 .capacity-list {
-  padding-top: 40px;
-  margin:40px auto;
+  margin:60px auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
