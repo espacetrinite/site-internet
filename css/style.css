@@ -1638,7 +1638,7 @@ h1, h2, h3, .titre {
 }
 
 h1 {
-  font-size: 2.5rem; /* ou la taille que tu veux garder */
+  font-size: 1.5rem; /* ou la taille que tu veux garder */
 }
 
 /* Texte courant */
