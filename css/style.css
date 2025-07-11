@@ -1000,7 +1000,6 @@ section h2 {
   .gallery-mosaic{
     grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
     gap:12px;
-    padding:0 3vw;
   }
 }
 
