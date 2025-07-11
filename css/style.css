@@ -77,8 +77,6 @@ section h2 {
 
 /* ---------- colonne B : contenu ---------- */
 .hero-content{
-  min-height: 80vh;
-  margin-top: 60px;
   display:flex;
   flex-direction:column;
   gap:30px;
