@@ -58,6 +58,7 @@ section h2 {
   grid-template-columns:70px 1fr 260px;   /* A | B | C */
   gap:60px;
   align-items:center;
+  margin-bottom:60px;
 }
 
 /* ---------- colonne A : pastilles ---------- */
