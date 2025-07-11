@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "Salle Estienne d'Orves",
       max: 25, min: 6, pmr: true,
       eventTypes: [
-        { type: "conference", label: "Conférence",       capacity: 25 },
+        { type: "conference", label: "Conférence",       capacity: 20 },
         { type: "reunion",    label: "Réunion en U",     capacity: 16 },
         { type: "classe",     label: "Salle de classe",  capacity: 18 }
       ],
