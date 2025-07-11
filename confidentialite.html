@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de confidentialité – Espace Trinité</title>
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;800&display=swap" rel="stylesheet">
+  <script src="js/header.js"></script>
+  <script src="js/script.js"></script>
+  <style>
+    /* === SECTION confidentialite — fond inversé, structure épurée === */
+    #confidentialite {
+      background: black;
+      color: white;
+      padding: 120px 40px;
+      min-height: 100vh;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 24px;
+    }
+
+    #confidentialite h1, 
+    #confidentialite h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    #confidentialite p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      max-width: 800px;
+    }
+
+    #confidentialite a {
+      color: #ffcc00;
+      text-decoration: underline;
+    }
+
+    #confidentialite a:hover {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #confidentialite {
+        padding: 100px 20px;
+      }
+
+      #confidentialite h1 {
+        font-size: 2rem;
+      }
+
+      #confidentialite p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================
+  =                       HEADER                           =
+  ===================================================== -->
+
+  <header id="site-header" role="banner">
+    <div class="container">
+      <!-- Logo avec texte alternatif descriptif -->
+      <a href="index.html" class="brand-link" title="Retour à l'accueil Espace Trinité">
+        <img src="assets/logo/petit-logo.png" alt="Logo Espace Trinité - Location de salles à Paris 9" class="logo-accueil" loading="lazy">
+      </a>
+
+      <nav role="navigation" aria-label="Menu principal">
+        <div class="burger" aria-label="Ouvrir le menu de navigation" aria-expanded="false" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="index.html#accueil" title="Retour à l'accueil">Accueil</a></li>
+          <li><a href="index.html#apropos" title="En savoir plus sur Espace Trinité">À propos</a></li>
+          <li><a href="index.html#salles" title="Nos salles à Paris 9">Salles</a></li>
+          <li><a href="index.html#galerie" title="Photos des salles">Galerie</a></li>
+          <li><a href="index.html#tarifs" title="Nos tarifs de location">Tarifs</a></li>
+          <li><a href="index.html#restauration" title="Services de restauration proposés">Restauration</a></li>
+          <li><a href="index.html#contact" title="Contactez-nous">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =====================================================
+  =               SECTION : POLITIQUE DE CONFIDENTIALITÉ =
+  ===================================================== -->
+
+  <section id="confidentialite" class="confidentialite-section" aria-labelledby="confidentialite-title">
+    <div class="container">
+
+      <header>
+        <h1 id="confidentialite-title">🛡️ Politique de confidentialité</h1>
+        <p><strong>Dernière mise à jour :</strong> 01 juillet 2025</p>
+      </header>
+
+      <article>
+        <h2>1. Responsable du traitement</h2>
+        <address>
+          Espace Trinité<br>
+          3 rue de la Trinité, 75009 Paris<br>
+          Email : <a href="mailto:contact@espacetrinite.fr">contact@espacetrinite.fr</a>
+        </address>
+
+        <h2>2. Données collectées</h2>
+        <p>Nous collectons uniquement les données strictement nécessaires :</p>
+        <ul>
+          <li>Prénom, nom</li>
+          <li>Adresse e-mail</li>
+          <li>Message libre dans le formulaire de contact</li>
+        </ul>
+
+        <h2>3. Finalités du traitement</h2>
+        <ul>
+          <li>Répondre à vos demandes</li>
+          <li>Vous recontacter à votre demande</li>
+          <li>Réaliser des statistiques anonymes</li>
+        </ul>
+
+        <h2>4. Cookies</h2>
+        <p>Nous utilisons uniquement des cookies essentiels au bon fonctionnement du site.</p>
+
+        <h2>5. Durée de conservation</h2>
+        <p>3 ans à compter du dernier contact.</p>
+
+        <h2>6. Vos droits</h2>
+        <p>Vous disposez de droits d’accès, rectification, effacement, opposition, limitation, portabilité. Contactez : <a href="mailto:contact@espacetrinite.fr">contact@espacetrinite.fr</a></p>
+      </article>
+
+    </div>
+  </section>
+  
+  <!-- =====================================================
+  =                     FOOTER                           =
+  ===================================================== -->
+
+  <footer role="contentinfo">
+    <div class="container">
+      <p>&copy; Espace Trinité</p>
+      <nav aria-label="Liens de bas de page">
+        <a href="mentions-legales.html" rel="nofollow">Mentions légales</a>
+        <a href="confidentialite.html" rel="nofollow">Politique de confidentialité</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+/* =========================================================
+   HEADER FIXE
+========================================================= */
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: white;
+  color: black;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 20px;
+}
+
+.logo-accueil {
+  height: 40px;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+.brand-link:hover {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Menu header = même typo que les titres */
+#site-header nav a {
+  font-family: 'Martian Mono', monospace;
+  font-weight: bold;
+}
+
+#site-header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  font-size: 0; /* ← empêche les espaces résiduels entre les éléments inline-flex */
+  display: flex;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#site-header nav ul li {
+  font-size: 1rem; /* ← on remet une taille de police ici */
+  display: flex;
+  align-items: center;
+}
+
+
+#site-header nav a {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+
+#site-header nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: black;
+  transition: width 0.3s ease;
+}
+
+#site-header nav a:hover::after,
+.nav-links a.active-section::after {
+  width: 100%;
+}
+
+/* --- Indicateur section courante --- */
+#site-header:not(.scrolled) .nav-links a.active-section {
+  color: white !important;
+  background: black;
+  padding: 4px 8px;
+}
+
+#site-header.scrolled .nav-links a.active-section {
+  color: black !important;
+  background: white;
+  padding: 4px 8px;
+}
+
+/* =========================================================
+   BURGER MENU
+========================================================= */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.burger span {
+  width: 25px;
+  height: 2px;
+  background: black;
+  transition: all 0.3s ease;
+}
+
+.burger.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(11px);
+}
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+.burger.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-11px);
+}
+.burger.open span {
+  background: blaxk;
+}
+
+/* =========================================================
+   NAVIGATION MOBILE
+========================================================= */
+.nav-links {
+  align-items: center;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .burger { display: flex; z-index: 1001; }
+
+  .nav-links {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 30px;
+    row-gap: 50px;
+    transform: translateY(-20%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  #site-header nav ul {
+    padding-top: 20px;
+    gap: 20px;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    color: white !important;
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  .nav-links a:hover {
+    background: white;
+    color: black !important;
+    padding: 4px 8px;
+  }
+
+  #site-header nav a.active-section::after {
+    width: 100%;
+  }
+
+}
+
+/* =========================================================
+   MODE SCROLLED
+========================================================= */
+#site-header.scrolled {
+  background: black;
+  color: white;
+}
+
+#site-header.scrolled .brand-link,
+#site-header.scrolled nav a {
+  color: white;
+}
+
+#site-header.scrolled nav a::after {
+  background: white;
+}
+
+#site-header.scrolled .logo-accueil {
+  filter: brightness(0) invert(1);
+}
+
+#site-header.scrolled .burger span {
+  background: white;
+}
+
+
+/* =========================================================
+   • Points séparateurs entre liens du header (desktop)
+========================================================= */
+
+/* point noir après chaque <li>, sauf le dernier */
+#site-header nav ul li:not(:last-child)::after {
+  content: "•";
+  margin: 0 8px;          /* espace autour du point */
+  font-size: 1.2rem;
+  line-height: 1;
+  color: black;
+}
+
+/* même point, mais blanc quand le header est scrolled */
+#site-header.scrolled nav ul li:not(:last-child)::after {
+  color: white;
+}
+
+/* On retire les points dans le menu mobile */
+@media (max-width: 768px) {
+  #site-header nav ul li:not(:last-child)::after {
+    display: none;
+  }
+}
+
+/* =========================================================
+   FOOTER (inversé)
+========================================================= */
+footer {
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 30px 10px;
+  font-size: 0.9rem;
+}
+
+footer nav {
+  margin-top: 10px;
+}
+
+footer a {
+  position: relative;
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+
+footer a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+footer a:hover::after {
+  width: 100%;
+}

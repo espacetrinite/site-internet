@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentions légales – Espace Trinité</title>
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;800&display=swap" rel="stylesheet">
+  <script src="js/header.js"></script>
+  <script src="js/script.js"></script>
+
+  <style>
+    /* === SECTION MENTIONS — fond inversé, structure épurée === */
+    #mentions {
+      background: black;
+      color: white;
+      padding: 120px 40px;
+      min-height: 100vh;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 24px;
+    }
+
+    #mentions h1, 
+    #mentions h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    #mentions p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      max-width: 800px;
+    }
+
+    #mentions a {
+      color: #ffcc00;
+      text-decoration: underline;
+    }
+
+    #mentions a:hover {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #mentions {
+        padding: 100px 20px;
+      }
+
+      #mentions h1 {
+        font-size: 2rem;
+      }
+
+      #mentions p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- =====================================================
+  =                       HEADER                           =
+  ===================================================== -->
+
+  <header id="site-header" role="banner">
+    <div class="container">
+      <!-- Logo avec texte alternatif descriptif -->
+      <a href="index.html" class="brand-link" title="Retour à l'accueil Espace Trinité">
+        <img src="assets/logo/petit-logo.png" alt="Logo Espace Trinité - Location de salles à Paris 9" class="logo-accueil" loading="lazy">
+      </a>
+
+      <nav role="navigation" aria-label="Menu principal">
+        <div class="burger" aria-label="Ouvrir le menu de navigation" aria-expanded="false" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="index.html#accueil" title="Retour à l'accueil">Accueil</a></li>
+          <li><a href="index.html#apropos" title="En savoir plus sur Espace Trinité">À propos</a></li>
+          <li><a href="index.html#salles" title="Nos salles à Paris 9">Salles</a></li>
+          <li><a href="index.html#galerie" title="Photos des salles">Galerie</a></li>
+          <li><a href="index.html#tarifs" title="Nos tarifs de location">Tarifs</a></li>
+          <li><a href="index.html#restauration" title="Services de restauration proposés">Restauration</a></li>
+          <li><a href="index.html#contact" title="Contactez-nous">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =====================================================
+  =               SECTION : MENTIONS LÉGALES             =
+  ===================================================== -->
+
+  <section id="mentions" class="mentions-section" aria-labelledby="mentions-title">
+    <div class="container">
+
+      <header>
+        <h1 id="mentions-title">📃 Mentions légales</h1>
+      </header>
+
+      <article>
+        <h2>Éditeur du site</h2>
+        <address>
+          Espace Trinité<br>
+          3 rue de la Trinité, 75009 Paris<br>
+          Email : <a href="mailto:contact@espacetrinite.fr">contact@espacetrinite.fr</a><br>
+          Directeur de publication : [Nom à renseigner]
+        </address>
+
+        <h2>Hébergeur</h2>
+        <p>
+          Firebase (Google)<br>
+          Google Cloud Platform<br>
+          1600 Amphitheatre Parkway, Mountain View, CA 94043, USA
+        </p>
+
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          Tous les contenus du site (textes, images, logo, graphismes) sont la propriété exclusive de Espace Trinité, sauf mention contraire. Toute reproduction sans autorisation est interdite.
+        </p>
+
+        <h2>Design et Développement du site</h2>
+        <p>
+          Charte graphique et design réalisés par Quitterie de La Teyssonière –
+          <a href="https://www.linkedin.com/in/adrien-morel/" target="_blank" rel="noopener noreferrer">
+            Profil LinkedIn
+          </a>
+        </p>
+
+        <p>
+          Site conçu et développé par Adrien Morel –
+          <a href="https://www.linkedin.com/in/adrien-morel/" target="_blank" rel="noopener noreferrer">
+            Profil LinkedIn
+          </a>
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+  =                     FOOTER                           =
+  ===================================================== -->
+    
+  <footer role="contentinfo">
+    <div class="container">
+      <p>&copy; Espace Trinité</p>
+      <nav aria-label="Liens de bas de page">
+        <a href="mentions-legales.html" rel="nofollow">Mentions légales</a>
+        <a href="confidentialite.html" rel="nofollow">Politique de confidentialité</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,1650 @@
+/* Import fallback police */
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 100;
+  margin: 0;
+  padding: 0;
+  color: #111;
+  line-height: 1.6;
+}
+
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 10px;
+}
+
+section {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .6s ease, transform .6s ease;
+  padding: 60px 0px;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section h2 {
+  font-size: 2.4rem;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  border: 3px solid black; /* encadrement noir */
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ============ GRILLE ACCUEIL ============ */
+.hero-grid{
+  display:grid;
+  grid-template-columns:70px 1fr 260px;   /* A | B | C */
+  gap:60px;
+  align-items:center;
+}
+
+/* ---------- colonne A : pastilles ---------- */
+.dot-column{
+  display:flex;
+  flex-direction:column;
+  gap:50px;
+  align-items:center;
+}
+
+/* Pastilles */
+.dot{width:70px;height:70px;border-radius:50%;}
+.dot-red   {background:#b22222;}
+.dot-blue  {background:#005bbb;}
+.dot-yellow{background:#ffbc00;}
+.dot-green {background:#00a859;}
+
+/* ---------- colonne B : contenu ---------- */
+.hero-content{
+  min-height: 80vh;
+  margin-top: 60px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+}
+
+.accueil-logo img{
+  max-width:320px;
+  width:100%;
+  height:auto;}
+
+.hero-content h2{
+  font-size:2.5rem;
+  font-weight:800;
+  margin:0;
+}
+.hero-content p{
+  font-size:1.1rem;
+  line-height:1.6;
+  margin:0;
+  max-width:700px;
+}
+
+/* ---------- colonne C : cercle ---------- */
+.hero-right{display:flex;justify-content:center;}
+.hero-circle{
+  width:260px;height:260px;border-radius:50%;background:#111;
+}
+/* =======================
+   RESPONSIVE ≤ 768 px
+======================= */
+@media (max-width: 768px) {
+
+  .hero-content{
+    margin-top: 0;
+  }
+
+  .hero-grid{
+    grid-template-columns: 1fr;   /* texte + pastilles en colonne unique */
+    position: relative;           /* référentiel pour le cercle fixe */
+    gap: 40px;
+  }
+
+  /* Pastilles en ligne */
+  .dot-column{
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  /* ==== Cercle fixe à droite ==== */
+  .hero-right{
+    position: absolute;           /* sort du flux pour ne plus bouger */
+    top: 50%;
+    right: 20px;                  /* marge droite */
+    transform: translateY(-50%);  /* centrage vertical */
+    pointer-events: none;         /* clics passent au travers */
+  }
+
+  /* on réduit légèrement le cercle si besoin */
+  .hero-circle{
+    width: 0px;
+    height: 0px;
+  }
+}
+
+/* ===========================================================
+  BANDEAU DE PHOTOS
+   =========================================================== */
+
+.photo-band {
+  background: #fff;
+  padding: 0;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  overflow-x: hidden;
+
+}
+
+.photo-band-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.photo-item {
+  flex: 1;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  min-height: 200px;
+  transition: transform 0.3s ease;
+}
+
+/* ---- MOBILE BREAKPOINT ---- */
+@media (max-width: 768px) {
+  .photo-band-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .photo-item {
+    flex: 0 0 80%;
+    margin-right: 12px;
+    scroll-snap-align: center;
+  }
+}
+
+
+/* ---- TÉLÉPHONE TRÈS ÉTROIT ---- */
+@media (max-width: 480px) {
+  .photo-item {
+    flex: 0 0 90%;
+  }
+}
+
+
+/* ===========================================================
+   CAPACITÉS — Cartes harmonisées avec .tarif-card
+   =========================================================== */
+
+.capacity-list {
+  padding-top: 40px;
+  margin:40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --------- Carte individuelle --------- */
+.capacity-item {
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 3px solid black; /* encadrement */
+  transition: transform 0.3s ease;
+}
+
+/* --------- Icône + titre --------- */
+.capacity-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.capacity-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  filter: invert(0); /* icône noire sur fond blanc */
+}
+
+.capacity-type {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: black;
+}
+
+/* --------- Badges --------- */
+.capacity-badges {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: black;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  white-space: nowrap;
+  border: 1px solid white; /* optionnel, pour cohérence avec .btn inversé */
+}
+
+
+/* =========================================================== */
+/* Responsive : empilement vertical sur mobile                  */
+/* =========================================================== */
+@media (max-width: 768px) {
+
+  /* Carte passe en colonne */
+  .capacity-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* Icône réduite, titre légèrement plus petit */
+  .capacity-icon  { width: 28px; height: 28px; }
+  .capacity-type  { font-size: 1.05rem; }
+
+  /* Badges à la suite sous le titre */
+  .capacity-badges {
+    margin-left: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .badge { font-size: 0.9rem; }
+}
+
+/* ===========================================================
+   Etiquette devis
+   =========================================================== */
+
+.devis {
+  max-width: 320px;
+  background: white;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin: 60px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: fadeInUp 0.6s ease;
+  border: 3px solid black; /* encadrement noir */
+  color: black; /* texte noir par défaut */
+}
+
+.prix {
+  font-size: 1.25rem;
+  color: black;
+  line-height: 1.6;
+}
+
+.prix .petit {
+  font-size: 0.9rem;
+  color: #555;
+  display: block;
+  margin-top: 4px;
+}
+
+.gratuit {
+  font-size: 0.90rem;
+  color: #555;
+  margin-top: -4px;
+}
+
+
+/* =========================================================== */
+/* Responsive : empilement vertical sur mobile                  */
+/* =========================================================== */
+
+/* Optional animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ================================
+   SECTION À PROPOS – VERSION ÉPURÉE
+================================ */
+.section-apropos {
+  position: relative;
+  color: white;
+  background: black;
+  text-align: left;
+}
+
+.section-apropos .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.section-apropos h2 {
+  color: white;
+}
+
+.section-apropos p {
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  color: #f2f2f2;
+}
+
+
+/* ================================
+   ICONES
+================================ */
+.apropos-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px 60px;
+  margin: 40px auto;
+  max-width: 900px;
+}
+
+.apropos-icons .icon-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+  width: 180px;
+}
+
+.apropos-icons .icon-box i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.apropos-icons .icon-box p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.4;
+  max-width: 160px;
+  color: #ddd;
+}
+
+/* ================================
+   RESPONSIVE ICONES
+================================ */
+@media (max-width: 768px) {
+  .apropos-icons {
+    justify-content: space-around;
+    gap: 30px 20px;
+  }
+
+  .apropos-icons .icon-box {
+    width: 45%; /* 2 colonnes */
+  }
+
+  .apropos-icons .icon-box i {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+
+  .apropos-icons .icon-box p {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .apropos-icons .icon-box {
+    width: 100%; /* 1 par ligne sur petit mobile */
+  }
+}
+
+/* ================================
+   INFOS & LIEU
+================================ */
+.info-apropos {
+  padding-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+}
+
+.info-apropos .lieu {
+  flex: 1 1 45%;
+  color: white;
+  font-weight: 300;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.info-apropos .lieu h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-apropos .lieu p {
+  margin-bottom: 10px;
+  color: #f2f2f2;
+}
+
+.info-apropos .label {
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  color: white;
+}
+
+.acces-list {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.acces-list li {
+  margin-bottom: 6px;
+  font-size: 1rem;
+  color: white;
+  list-style: disc;
+}
+
+.acces-list .small {
+  font-size: 0.9rem;
+  color: #bbb;
+  margin-left: 6px;
+}
+
+/* ================================
+   MAP
+================================ */
+.map-container {
+  flex: 1 1 50%;
+  min-width: 280px;
+}
+
+.map-container iframe {
+  width: 100%;
+  min-height: 400px;
+  border: 3px solid white;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+}
+
+
+/* ================================
+   SECTION SALLES
+================================ */
+.section-salles {
+  background: white;
+  text-align: left;
+}
+
+.section-salles h2 {
+  color: black;
+}
+
+.section-salles .intro {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #222;
+}
+
+/* ================================
+   GRILLE DES CARTES
+================================ */
+.grid-salles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .grid-salles {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   CARTE INDIVIDUELLE
+================================ */
+.card-salle {
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  padding: 30px 25px;
+  transition: all 0.3s ease;
+  text-align: left;
+  color: black;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  border: 3px solid black;
+}
+
+/* ================================
+   VARIANTES COLORÉES
+   ================================ */
+
+.card-rouge {
+  border-color: #b22222;
+}
+.card-rouge:hover {
+  background: #b22222;
+  color: white;
+  border-color: #b22222;
+}
+.card-rouge:hover h3,
+.card-rouge:hover .superficie,
+.card-rouge:hover .agencement-item,
+.card-rouge:hover .agencement-item img,
+.card-rouge:hover p,
+.card-rouge:hover .details {
+  color: white;
+}
+.card-rouge:hover .agencement-item img {
+  filter: brightness(0) invert(1);
+}
+
+.card-bleu {
+  border-color: #005bbb;
+}
+.card-bleu:hover {
+  background: #005bbb;
+  color: white;
+}
+.card-bleu:hover h3,
+.card-bleu:hover .superficie,
+.card-bleu:hover .agencement-item,
+.card-bleu:hover .agencement-item img,
+.card-bleu:hover p,
+.card-bleu:hover .details {
+  color: white;
+}
+.card-bleu:hover .agencement-item img {
+  filter: brightness(0) invert(1);
+}
+
+.card-jaune {
+  border-color: #ffbc00;
+}
+.card-jaune:hover {
+  background: #ffbc00;
+  color: white;
+}
+.card-jaune:hover h3,
+.card-jaune:hover .superficie,
+.card-jaune:hover .agencement-item,
+.card-jaune:hover .agencement-item img,
+.card-jaune:hover p,
+.card-jaune:hover .details {
+  color: white;
+}
+.card-jaune:hover .agencement-item img {
+  filter: brightness(0) invert(1);
+}
+
+.card-vert {
+  border-color: #00a859;
+}
+.card-vert:hover {
+  background: #00a859;
+  color: white;
+}
+.card-vert:hover h3,
+.card-vert:hover .superficie,
+.card-vert:hover .agencement-item,
+.card-vert:hover .agencement-item img,
+.card-vert:hover p,
+.card-vert:hover .details {
+  color: white;
+}
+.card-vert:hover .agencement-item img {
+  filter: brightness(0) invert(1);
+}
+
+/* ================================
+   CONTENU DES CARTES
+================================ */
+.card-salle img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.card-salle h3 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.card-salle .superficie {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 15px 0 10px;
+  color: #111;
+  transition: color 0.3s ease;
+}
+
+.card-salle p,
+.card-salle .description,
+.card-salle .details {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 12px;
+  color:black;
+  transition: color 0.3s ease;
+}
+
+/* ================================
+   VOIR PLUS DE PHOTOS
+================================ */
+
+.voir-plus {
+  text-align: right;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.voir-plus a {
+  font-size: 0.9rem;
+  text-decoration: underline;
+  color: inherit;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.card-rouge .voir-plus a { color: #ff9999; }
+.card-bleu  .voir-plus a { color: #aad4ff; }
+.card-jaune .voir-plus a { color: #ffe480; }
+.card-vert  .voir-plus a { color: #8ef2c0; }
+
+.card-rouge:hover .voir-plus a,
+.card-bleu:hover  .voir-plus a,
+.card-jaune:hover .voir-plus a,
+.card-vert:hover  .voir-plus a {
+  color: white;
+}
+
+
+.voir-plus a:hover {
+  text-decoration: none;
+}
+
+/* ================================
+   LISTE D'AGENCEMENT
+================================ */
+.agencements {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0 20px;
+}
+
+.agencement-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 0;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: black;
+  border-bottom: 1px solid #ccc;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.agencement-item:last-child {
+  border-bottom: none;
+}
+
+.agencement-item img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+  margin: 0;
+}
+
+/* --- Équipements sous forme de tags --- */
+/* ==========================
+   WRAPPER DES TAGS
+   ========================== */
+.equipements {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* ==========================
+   TAG – Thème clair (par défaut)
+   ========================== */
+.tag {
+  --bg:   #e9ebee;   /* gris + contrasté */
+  --txt:  #111;      /* quasi-noir                */
+  --brd:  #bbb;      /* bordure plus visible      */
+
+  background: var(--bg);
+  color: var(--txt);
+  border: 1px solid var(--brd);
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.tag i { font-size: 1rem; }
+
+/* ==========================
+   TAG – Thème sombre
+   (ajoute la classe .dark-bg au parent,
+    ou .tag.dark directement)
+   ========================== */
+.dark-bg .tag,
+.tag.dark {
+  --bg:  #000;   /* fond noir intégral             */
+  --txt: #fff;   /* texte blanc                    */
+  --brd: #fff;   /* bordure blanche (mieux visible)*/
+}
+
+
+/* --- Responsive typo --- */
+@media (max-width: 768px) {
+  .section-salles h2 {
+    font-size: 2.2rem;
+  }
+
+  .section-salles .intro {
+    font-size: 1rem;
+  }
+
+  .card-salle h3 {
+    font-size: 1.3rem;
+  }
+
+  .card-salle p {
+    font-size: 0.95rem;
+  }
+
+  .tag {
+    font-size: 0.85rem;
+  }
+}
+
+
+/* ====================================================
+   GALERIE – PALETTE & VARIABLES
+==================================================== */
+:root{
+  /* couleurs salles */
+  --c-blanc : #ffffff;
+  --c-noir  : #000000;
+  --c-rouge : #b22222;  /* Pierre Goursat */
+  --c-bleu  : #005bbb;  /* Estienne d'Orves */
+  --c-jaune : #ffbc00;  /* Olivier Messiaen */
+  --c-vert  : #00a859;  /* La Bruyère */
+}
+
+/* ====================================================
+   SECTION, TITRE & CONTAINER
+==================================================== */
+.gallery-section{
+  background: var(--c-noir);
+  color: var(--c-blanc);
+  width: 100%;
+  overflow: hidden;
+}
+
+.gallery-section h2{
+  text-align: center;
+  margin: 40px 0 20px;
+}
+
+/* ====================================================
+   NAVIGATION BOUTONS
+==================================================== */
+.gallery-nav{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.gallery-nav button {
+  background: black;
+  border: 3px solid white;
+  color: white;
+  font-size: 1rem;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* BOUTON ACTIF : surchargé par JS */
+.gallery-nav .active {
+  color: black;
+}
+
+/* ACCUEIL – BLANC */
+.gallery-nav .btn-blanc {
+  border-color: white;
+  color: white;
+}
+.gallery-nav .btn-blanc:hover,
+.gallery-nav .btn-blanc.active {
+  background: white;
+  color: black;
+}
+
+/* PIERRE GOURSAT – ROUGE */
+.gallery-nav .btn-rouge {
+  border-color: #b22222;
+  color: #b22222;
+}
+.gallery-nav .btn-rouge:hover,
+.gallery-nav .btn-rouge.active {
+  background: #b22222;
+  color: white;
+}
+
+/* ESTIENNE D’ORVES – BLEU */
+.gallery-nav .btn-bleu {
+  border-color: #005bbb;
+  color: #005bbb;
+}
+.gallery-nav .btn-bleu:hover,
+.gallery-nav .btn-bleu.active {
+  background: #005bbb;
+  color: white;
+}
+
+/* OLIVIER MESSIAEN – JAUNE */
+.gallery-nav .btn-jaune {
+  border-color: #ffbc00;
+  color: #ffbc00;
+}
+.gallery-nav .btn-jaune:hover,
+.gallery-nav .btn-jaune.active {
+  background: #ffbc00;
+  color: black;
+}
+
+/* LA BRUYÈRE – VERT */
+.gallery-nav .btn-vert {
+  border-color: #00a859;
+  color: #00a859;
+}
+.gallery-nav .btn-vert:hover,
+.gallery-nav .btn-vert.active {
+  background: #00a859;
+  color: white;
+}
+
+
+/* ====================================================
+   SLIDES
+==================================================== */
+.gallery-scroll-container{ width:100%; }
+
+.gallery-slide{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+}
+
+.gallery-slide.active{ display:flex; }
+
+/* ====================================================
+   MOSAÏQUE
+==================================================== */
+.gallery-mosaic{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:15px;
+  padding:0 5vw;
+}
+
+.grid-item{
+  position:relative;
+  overflow:hidden;
+  border:3px solid var(--c-blanc);          /* valeur par défaut */
+}
+
+.grid-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s ease;
+}
+
+.grid-item:hover img{ transform:scale(1.05); }
+
+.grid-item.wide { grid-column:span 2; }
+.grid-item.tall { grid-row:span 2;   }
+.grid-item.large{ grid-column:span 2; grid-row:span 2; }
+
+/* --- Bordures colorées selon la salle (hérite du slide) --- */
+.gallery-slide.rouge .grid-item { border-color: var(--c-rouge); }
+.gallery-slide.bleu  .grid-item { border-color: var(--c-bleu);  }
+.gallery-slide.jaune .grid-item { border-color: var(--c-jaune); }
+.gallery-slide.vert  .grid-item { border-color: var(--c-vert);  }
+
+/* ====================================================
+   RESPONSIVE ≤ 768 px
+==================================================== */
+@media (max-width:768px){
+  .gallery-nav button{
+    font-size:.9rem;
+    padding:6px 12px;
+  }
+  .gallery-mosaic{
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:12px;
+    padding:0 3vw;
+  }
+}
+
+/* ====================================================
+   ZOOM VIEWER
+==================================================== */
+#zoom-viewer{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.9);
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999;
+}
+#zoom-viewer img{
+  max-width:90%;max-height:90%;
+}
+
+/* Flèches navigation */
+.zoom-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  font-size:3rem;color:var(--c-blanc);
+  cursor:pointer;user-select:none;
+  padding:0 18px;line-height:1;
+  transition:opacity .25s;
+}
+.zoom-arrow:hover{ opacity:.7; }
+.zoom-prev{ left:15px; }
+.zoom-next{ right:15px; }
+
+
+
+/* ===============================
+   SECTION TARIFS
+================================ */
+.section-tarifs {
+  color: black;
+  background: white;
+  text-align: left;
+}
+
+.section-tarifs .intro {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  color: black;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* ===============================
+   GRILLE TARIFS
+================================ */
+.tarif-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 50px;
+}
+
+/* ===============================
+   CARTE TARIF
+================================ */
+.tarif-card {
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  padding: 30px 24px;
+  transition: all 0.3s ease;
+  text-align: left;
+  border: 3px solid black;
+  color: black;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.tarif-card:hover {
+  background: black;
+  color: white;
+}
+
+/* === BRUYÈRE – VERT === */
+.tarif-card.vert {
+  border: 3px solid #00a859;
+}
+.tarif-card.vert:hover {
+  background: #00a859;
+  color: white;
+  border-left-color: white;
+}
+
+/* === ORVES – BLEU === */
+.tarif-card.bleu {
+  border: 3px solid #005bbb;
+}
+.tarif-card.bleu:hover {
+  background: #005bbb;
+  color: white;
+  border-left-color: white;
+}
+
+/* === GOURSAT – ROUGE === */
+.tarif-card.rouge {
+  border: 3px solid #b22222;
+}
+.tarif-card.rouge:hover {
+  background: #b22222;
+  color: white;
+  border-left-color: white;
+}
+
+/* === MESSIAEN – JAUNE === */
+.tarif-card.jaune {
+  border: 3px solid #ffbc00;
+}
+.tarif-card.jaune:hover {
+  background: #ffbc00;
+  color: white;
+  border-left-color: white;
+}
+
+
+.tarif-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.tarif-card p {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 10px 0;
+  color: inherit;
+}
+
+.tarif-card strong {
+  font-weight: 600;
+  color: inherit;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .tarif-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tarif-card {
+    padding: 24px 20px;
+  }
+
+  .section-tarifs h2 {
+    font-size: 2.2rem;
+  }
+
+  .section-tarifs .intro {
+    font-size: 1.05rem;
+  }
+}
+
+
+/* ============================================
+   SECTION RESTAURATION – VERSION INVERSÉE
+============================================ */
+.section-restauration {
+  padding: 60px 20px;
+  background: black;
+  color: white;
+  text-align: left;
+}
+
+/* ============================================
+   CONTENU : TEXTE + IMAGE
+============================================ */
+.restauration-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   BLOC FORMULE
+============================================ */
+.formule {
+  flex: 1 1 400px;
+  max-width: 500px;
+}
+
+/* BLOC FORMULE  — aligner libellé à gauche, prix à droite */
+.formule p {
+  display: flex;                  /* ← active le flex */
+  justify-content: space-between; /* ← sépare libellé et prix */
+  align-items: baseline;          /* ← aligne les textes sur la ligne de base */
+  font-size: 1.1rem;
+  margin: 10px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #eee;
+  font-weight: 400;
+  text-align: left;               /* garde le reste du texte aligné à gauche */
+}
+
+.formule p strong {
+  color: white;
+  font-weight: 600;
+  margin-right: 8px;              /* petit écart avant le prix */
+}
+
+/* si le prix est déjà dans un <span> ou s’il te faut un style spécial : */
+.formule p span.prix {
+  white-space: nowrap;            /* évite le retour à la ligne sur le prix */
+  margin-left: auto;              /* pousse le prix au bord droit si besoin */
+  color: #eee;
+  font-weight: 400;
+}
+
+
+/* ============================================
+   IMAGE
+============================================ */
+.restauration-img {
+  display: flex;
+  justify-content: center;
+}
+
+.restauration-img img {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90%;
+  object-fit: cover;
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media (max-width: 768px) {
+  .restauration-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .formule,
+  .restauration-img img{
+    flex: 1 1 100%;
+    height: 30%;
+  }
+
+  .section-restauration h2 {
+    font-size: 2.2rem;
+  }
+
+  .formule p {
+    font-size: 1rem;
+  }
+
+  .restauration-img img {
+    height:0;
+  }
+}
+
+/* ================================
+   SECTION CONTACT – MINIMALISTE
+================================ */
+.section-contact {
+  background: white;
+  text-align: left;
+}
+
+.section-contact .intro {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 60px;
+  color: #111;
+}
+
+/* ================================
+   FORMULAIRE
+================================ */
+.contact-form {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-grid input {
+  flex: 1;
+  min-width: 250px;
+  height: 52px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .form-grid {
+    flex-direction: column;
+  }
+}
+
+/* ================================
+   CHAMPS
+================================ */
+.contact-form input,
+.contact-form textarea {
+  padding: 14px;
+  border: 3px solid black;
+  background: white;
+  color: black;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form textarea {
+  min-height: 300px;
+  resize: vertical;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #888;
+  opacity: 1;
+}
+
+/* ================================
+   FOCUS
+================================ */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: black;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15); /* glow noir doux */
+  outline: none;
+  background-color: #fdfdfd; /* très léger changement de fond */
+}
+
+/* ================================
+   BOUTON ENVOYER
+================================ */
+.contact-form button {
+  align-self: center;
+}
+
+/* ===========================================================
+   FORMULAIRE ASSISTANT
+   =========================================================== */
+
+/* === Overlay === */
+#assistant-overlay {
+  position: fixed;
+  inset: 0;
+  display: none; /* sera flex via JS */
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+
+#assistant-overlay {
+  display: none;         /* caché par défaut */
+  position: fixed;
+  inset: 0;
+  /* …fond sombre, etc. … */
+}
+
+/* === Modal === */
+#assistant-modal {
+  background: white;
+  border: 3px solid black;
+  padding: 40px 30px;
+  max-width: 480px;
+  width: 90%;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: 'Helvetica', sans-serif;
+}
+
+.assistant-toggle {
+  background: black;
+  color: white;
+  border: 2px solid black;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: 'Helvetica', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.assistant-toggle:hover {
+  background: white;
+  color: black;
+}
+
+/* === Wrapper qui centre réellement le modal === */
+#assistant-box{
+  /* prend toute la surface de l’overlay */
+  width:100%;
+  height:100%;
+
+  /* centre #assistant-modal */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+/* === Titre === */
+#assistant-modal h3 {
+  font-family: 'Martian Mono', monospace;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin: 0 0 20px;
+  color: black;
+}
+
+/* === Champs du formulaire === */
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: black;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 3px solid black;
+  border-radius: 0;
+  background: white;
+  color: black;
+  font-family: 'Helvetica', sans-serif;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: black;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+}
+
+/* === Ligne de champ === */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px; /* 👈 ajoute de l'espace AVANT chaque bloc */
+}
+
+.form-row:not(:first-child) {
+  margin-top: 16px;
+}
+
+/* === Checkbox PMR === */
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.form-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: black;
+}
+.form-checkbox label {
+  margin: 0;
+  font-weight: 400;
+  color: black;
+}
+
+/* === Fond coloré par salle === */
+.result-bruyere  { background: #00a859; }   /* vert */
+.result-orves    { background: #005bbb; }   /* bleu */
+.result-messiaen { background: #ffbc00; color: black; } /* jaune */
+.result-goursat  { background: #b22222; }   /* rouge */
+
+/* === Bloc recommendation de base === */
+#assistant-result {
+  padding: 16px 20px;
+  font-size: 1rem;
+  color: white;
+  line-height: 1.6;
+  border: 3px solid white;
+  display: none;
+  transition: background 0.3s ease;
+}
+/* === Résultat sans correspondance === */
+.result-empty {
+  background: black;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* === Boutons === */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.actions .btn {
+  padding: 10px 20px;
+  border: 3px solid black;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  background: white;
+  color: black;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.actions .btn:hover {
+  background: black;
+  color: white;
+}
+
+
+/* -----------------------------------------------------------
+   Version mobile
+   -----------------------------------------------------------*/
+   
+@media (max-width: 768px) {
+
+  /* Overlay plein écran */
+  #assistant-overlay {
+    display: flex;
+    flex-direction: column;   /* empile les éléments verticalement */
+    align-items: center;      /* centre horizontalement */
+    justify-content: flex-start;
+    padding-top: 90px;        /* espace sous le haut de l’écran */
+  }
+
+
+  /* Fenêtre modale */
+  #assistant-modal {
+    position: relative;       /* se place dans le flux du flex-container */
+    width: 90%;
+    max-width: 90%;
+    margin: 0 auto;           /* centre horizontalement */
+    padding: 24px 20px;
+    top: 0;                   /* plus de translate */
+    left: 0;
+    transform: none;
+    box-sizing: border-box;
+  }
+
+  /* Titre dans la modale */
+  #assistant-modal h3 {
+    font-size: 1.4rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select {
+    height: 52px;
+  }
+
+  /* Champ date uniformisé */
+  input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 52px;
+    width: 100%;
+    padding: 10px 12px;
+  }
+
+  textarea {
+    min-height: 104px;
+    resize: vertical;
+  }
+}
+
+/* -----------------------------------------------------------
+   Blocage du scroll de fond
+   -----------------------------------------------------------*/
+/* bloque tout défilement page + inertie mobile */
+html.no-scroll,
+body.no-scroll {
+  position: fixed;       /* fige la page */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ================================
+   TITRES
+================================ */
+
+/* Titrage */
+h1, h2, h3, .titre {
+  font-family: 'Martian Mono', monospace;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.5rem; /* ou la taille que tu veux garder */
+}
+
+/* Texte courant */
+body, p, li, a, span {
+  font-family: 'Helvetica', sans-serif;
+  font-weight: 500; /* correspond à medium */
+}
+

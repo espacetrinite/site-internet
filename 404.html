@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 – Page introuvable</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: white;
+      font-family: 'Helvetica', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container-404 {
+      max-width: 480px;
+      padding: 40px 30px;
+      border: 3px solid white;
+      background: black;
+      box-shadow: 0 6px 24px rgba(255,255,255,0.1);
+    }
+
+    .container-404 h1 {
+      font-family: 'Martian Mono', monospace;
+      font-size: 4rem;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .container-404 h2 {
+      font-family: 'Martian Mono', monospace;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+    }
+
+    .container-404 p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: #eee;
+    }
+
+    .btn-retour {
+      display: inline-block;
+      padding: 12px 20px;
+      border: 2px solid white;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-retour:hover {
+      background: white;
+      color: black;
+    }
+
+    @media (max-width: 600px) {
+      .container-404 {
+        margin: 20px;
+        padding: 30px 20px;
+      }
+
+      .container-404 h1 {
+        font-size: 3rem;
+      }
+
+      .container-404 h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-404">
+    <h1>404</h1>
+    <h2>Page introuvable</h2>
+    <p>Désolé, la page que vous cherchez n'existe pas ou a été déplacée.<br>
+    Vérifiez l’URL ou revenez à l’accueil.</p>
+    <a href="index.html" class="btn-retour">Retour à l’accueil</a>
+  </div>
+</body>
+</html>
