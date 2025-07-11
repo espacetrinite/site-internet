@@ -1259,6 +1259,7 @@ section h2 {
 
   .formule,
   .restauration-img img{
+    padding:0 0;
     flex: 1 1 100%;
     height: 30%;
   }
