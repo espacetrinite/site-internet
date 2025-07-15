@@ -2,12 +2,15 @@ const axios = require("axios");
 
 exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Méthode non autorisée" };
+    return {
+      statusCode: 405,
+      body: "Méthode non autorisée"
+    };
   }
 
   const body = JSON.parse(event.body);
 
-  // 🔒 Vérification de la clé secrète
+  // 🔒 Sécurité : clé secrète
   if (!process.env.FORM_SECRET_KEY || body.secret !== process.env.FORM_SECRET_KEY) {
     return {
       statusCode: 403,
@@ -18,7 +21,7 @@ exports.handler = async function (event) {
   const { name, email, subject, message } = body;
 
   try {
-    const response = await axios.post(
+    await axios.post(
       "https://api.brevo.com/v3/smtp/email",
       {
         sender: { name, email },
@@ -35,3 +38,20 @@ exports.handler = async function (event) {
       {
         headers: {
           "api-key": process.env.BREVO_API_KEY,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ success: true })
+    };
+  } catch (error) {
+    console.error("Erreur d’envoi avec Brevo :", error.response?.data || error.message);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Échec de l’envoi du message" })
+    };
+  }
+};
