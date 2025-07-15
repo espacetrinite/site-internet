@@ -516,6 +516,30 @@ section h2 {
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
 }
 
+.map-placeholder {
+  background: #f7f7f7;
+  border: 3px solid white;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.map-placeholder button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
 
 /* ================================
    SECTION SALLES
