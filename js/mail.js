@@ -1,18 +1,19 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("contact-form");
 
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
+    // 🔐 Récupérer le token Turnstile
     const tokenField = document.querySelector("[name='cf-turnstile-response']");
-    const token = tokenField?.value;
+    const token = tokenField?.value || "";
 
     if (!token) {
-      alert("Veuillez valider le CAPTCHA.");
+      alert("Veuillez valider le CAPTCHA avant d'envoyer.");
       return;
     }
 
-    // ✅ Vérifier CAPTCHA via fonction serverless
+    // 🔒 Étape 1 : Vérification du CAPTCHA via Netlify
     try {
       const captchaRes = await fetch("/.netlify/functions/validate-captcha", {
         method: "POST",
@@ -20,24 +21,24 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ token })
       });
 
-      const result = await captchaRes.json();
-      console.log("Réponse CAPTCHA:", result);
+      const captchaJson = await captchaRes.json();
+      console.log("Réponse CAPTCHA :", captchaJson);
 
-      if (!result.success) {
+      if (!captchaJson.success) {
         alert("Échec du CAPTCHA. Veuillez réessayer.");
         return;
       }
     } catch (err) {
-      console.error("Erreur CAPTCHA :", err);
-      alert("Problème serveur CAPTCHA.");
+      console.error("Erreur serveur CAPTCHA :", err);
+      alert("Erreur lors de la vérification CAPTCHA.");
       return;
     }
 
-    // ✅ CAPTCHA validé, on peut envoyer le mail
+    // ✅ Étape 2 : Envoi du message après validation
     const formData = new FormData(form);
     const payload = {
       ...Object.fromEntries(formData.entries()),
-      secret: "trinite-XuB23v9Ld8"
+      secret: "trinite-XuB23v9Ld8" // ou mieux : variable dans Netlify
     };
 
     try {
@@ -50,13 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (res.ok) {
         alert("Message envoyé !");
         form.reset();
-        turnstile.reset(); // Important : reset du CAPTCHA
       } else {
-        alert("Erreur d’envoi du message.");
+        alert("Une erreur est survenue. Merci de réessayer.");
       }
     } catch (err) {
-      console.error("Erreur d’envoi :", err);
-      alert("Impossible d’envoyer le message.");
+      console.error("Erreur lors de l’envoi du formulaire :", err);
+      alert("Impossible d’envoyer le message. Vérifiez votre connexion.");
     }
   });
 });
