@@ -662,13 +662,13 @@
       <h2>CONTACT</h2>
       <p class="intro">Une question, une demande particulière ? Écrivez-nous, nous vous répondrons rapidement.</p>
       
-      <form class="contact-form">
+      <form id="contact-form" class="contact-form">
         <div class="form-grid">
-          <input type="text" placeholder="Votre nom" required>
-          <input type="email" placeholder="Votre email" required>
+          <input type="text" name="name" placeholder="Votre nom" required>
+          <input type="email" name="email" placeholder="Votre email" required>
         </div>
-        <input type="text" placeholder="Objet" required>
-        <textarea id="contact-message" placeholder="Votre message..." rows="6" required></textarea>
+        <input type="text" name="subject" placeholder="Objet" required>
+        <textarea name="message" id="contact-message" placeholder="Votre message..." rows="6" required></textarea>
         <button class="btn" type="submit">Envoyer le message</button>
       </form>
     </div>
