@@ -1671,11 +1671,11 @@ body.no-scroll {
   right: 0;
   background: black;
   color: white;
-  padding: 14px 24px;
+  padding: 8px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   z-index: 1000;
   opacity: 0.95;
   font-family: var(--font-main);
@@ -1687,9 +1687,10 @@ body.no-scroll {
 }
 
 .cookie-banner button {
+  padding: 8px 16px;
   border: 3px solid white;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.85rem;
   background: black;
   color: white;
   cursor: pointer;
