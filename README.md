@@ -7,7 +7,8 @@ Bienvenue sur le dépôt du site vitrine d’Espace Trinité, conçu pour offrir
 
 ## 🌐 Objectif
 
-Créer une interface web moderne, responsive et intuitive, présentant chaque salle sous forme de galeries, avec un design épuré et une navigation simple. L'ensemble est optimisé pour un hébergement statique sécurisé avec **formulaire de contact protégé par CAPTCHA**.
+Créer une interface web moderne, responsive et intuitive, présentant chaque salle sous forme de galeries, avec un design épuré et une navigation simple.  
+L'ensemble est optimisé pour un hébergement statique sécurisé avec **formulaire de contact protégé par CAPTCHA**.
 
 ---
 
@@ -18,6 +19,46 @@ Créer une interface web moderne, responsive et intuitive, présentant chaque sa
 - **JavaScript (modulaire)**
 - **Fonctions serverless Netlify**
 - **Cloudflare Turnstile (CAPTCHA anti-spam sécurisé)**
+- **Brevo (ex-Sendinblue) – Envoi d’email via API**
+
+---
+
+## 🧾 Informations techniques
+
+### 🔐 Domaine et DNS
+
+- **Nom de domaine :** [`espacetrinite.fr`](https://espacetrinite.fr)
+- **Registrar :** [OVHcloud](https://www.ovh.com/)
+- **Gestion DNS :** [Cloudflare](https://www.cloudflare.com/)
+
+#### 🔧 Configuration DNS (Cloudflare)
+
+| Type   | Nom               | Contenu                          | Proxy Cloudflare | TTL         |
+|--------|-------------------|----------------------------------|------------------|-------------|
+| A      | espacetrinite.fr  | `75.2.60.5` *(Netlify)*          | ❌ DNS uniquement | Automatique |
+| CNAME  | www               | `espacetrinite.netlify.app`      | ❌ DNS uniquement | Automatique |
+
+> 💡 **Proxy désactivé** pour garantir la bonne gestion du HTTPS automatique par Netlify.
+
+---
+
+## ✉️ Formulaire de contact sécurisé
+
+Le formulaire est protégé contre les spams via [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/), et les messages sont transmis via l’API de [Brevo](https://www.brevo.com/fr/).
+
+### 🔒 Variables d’environnement Netlify requises
+
+| Clé               | Description                                   |
+|------------------|-----------------------------------------------|
+| `TURNSTILE_SECRET` | Clé secrète Cloudflare Turnstile              |
+| `FORM_SECRET_KEY` | Clé partagée utilisée côté client + fonction  |
+| `BREVO_API_KEY`   | Clé API Brevo pour l’envoi d’emails sécurisés |
+| `DEST_EMAIL`      | Adresse de destination pour les messages      |
+
+Deux fonctions serverless assurent la sécurité :
+
+- `/functions/validate-captcha.js` → Vérifie le CAPTCHA côté serveur
+- `/functions/send-mail.js` → Envoie l’email en POST sécurisé à Brevo
 
 ---
 
@@ -79,45 +120,32 @@ Tu peux tester le site localement simplement en ouvrant `index.html` dans ton na
 
 ---
 
-## 🚀 Déploiement recommandé
+## 🚀 Déploiement
 
-Le site est compatible avec :
+Le site est optimisé pour un hébergement statique avec exécution de fonctions serverless.  
+Plateformes compatibles :
 
-- ✅ **Netlify** (recommandé)
+- **Netlify** ✅ *(recommandé)*
 - Vercel
-- GitHub Pages (⚠️ sans les fonctions serverless)
-- OVH / FTP classique (⚠️ formulaire inactif sans backend)
+- OVHcloud (avec redirection vers Netlify)
+- GitHub Pages *(sans les fonctions)*
 
 ---
 
-## 🔐 Variables d’environnement Netlify
+## 🛟 Mentions légales
 
-Configurer les variables suivantes dans le **panneau des Builds > Environment variables** :
-
-| Clé               | Utilité                                            |
-|-------------------|----------------------------------------------------|
-| `FORM_SECRET_KEY` | Doit correspondre au champ `secret` envoyé depuis le JS (`trinite-XuB23v9Ld8`) |
-| `TURNSTILE_SECRET`| Clé secrète Cloudflare Turnstile (backend)         |
-| `BREVO_API_KEY`   | Clé API SMTP Brevo (anciennement Sendinblue)       |
-| `DEST_EMAIL`      | Adresse e-mail de réception                        |
+- `mentions-legales.html` → Obligations légales
+- `confidentialite.html` → Politique de confidentialité (RGPD)
 
 ---
 
-## 🖼️ Aperçu
+## 📬 Contact
 
-![header](assets/img/header_apercu.png)
-![captcha](assets/img/captcha_apercu.png)
-![formulaire](assets/img/form_apercu.png)
-
----
-
-## ⚖️ Mentions légales
-
-> Le site inclut une page de mentions légales (`mentions-legales.html`) et une politique de confidentialité (`confidentialite.html`) conformes aux exigences légales françaises.
+Pour toute demande ou suggestion :  
+📧 adrien.morel@gmail.com
 
 ---
 
-## 👤 Contact
+## 📸 Aperçu
 
-📧 adrien.morel@gmail.com  
-🌐 [espacetrinite.fr](https://espacetrinite.fr)
+![Aperçu Espace Trinité](assets/img/preview.png)
