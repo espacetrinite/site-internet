@@ -12,15 +12,13 @@ exports.handler = async (event) => {
     const { token } = JSON.parse(event.body);
     const secret = process.env.TURNSTILE_SECRET;
 
+    const params = new URLSearchParams();
+    params.append("secret", secret);
+    params.append("response", token);
+
     const response = await axios.post(
       "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      null,
-      {
-        params: {
-          secret: secret,
-          response: token
-        }
-      }
+      params
     );
 
     if (response.data.success) {
@@ -40,7 +38,7 @@ exports.handler = async (event) => {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ success: false, error: "Erreur serveur" })
+      body: JSON.stringify({ success: false, error: error.message })
     };
   }
 };
