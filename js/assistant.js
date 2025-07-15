@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       id: "goursat",
       name: "Salle Pierre Goursat",
-      max: 25, min: 10, pmr: true,
+      max: 25, min: 10, pmr: false,
       eventTypes: [
         { type: "conference", label: "Conférence",       capacity: 25 },
         { type: "reunion",    label: "Réunion en U",     capacity: 18 },
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       id: "orves",
       name: "Salle Estienne d'Orves",
-      max: 25, min: 6, pmr: true,
+      max: 25, min: 6, pmr: false,
       eventTypes: [
         { type: "conference", label: "Conférence",       capacity: 20 },
         { type: "reunion",    label: "Réunion en U",     capacity: 16 },
