@@ -1,0 +1,7 @@
+# netlify.toml
+
+[[redirects]]
+  from = http
+  to = httpshostsplat
+  status = 301
+  force = true
