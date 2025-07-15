@@ -507,6 +507,7 @@ section h2 {
 .map-container {
   flex: 1 1 50%;
   min-width: 280px;
+  position: relative;
 }
 
 .map-container iframe {
@@ -514,9 +515,15 @@ section h2 {
   min-height: 400px;
   border: 3px solid white;
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+  display: block;
 }
 
+/* Placeholder même hauteur que l'iframe */
 .map-placeholder {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: white;
   border: 3px solid black;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -530,6 +537,7 @@ section h2 {
 .map-placeholder p {
   margin-bottom: 1rem;
   line-height: 1.4;
+  color: black; /* Forcer le noir */
 }
 
 .map-placeholder .btn {
