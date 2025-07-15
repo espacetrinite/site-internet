@@ -18,7 +18,6 @@ exports.handler = async function (event) {
     };
   }
 
-  // 🔒 Vérification de la clé secrète
   if (!process.env.FORM_SECRET_KEY || body.secret !== process.env.FORM_SECRET_KEY) {
     return {
       statusCode: 403,
@@ -28,16 +27,11 @@ exports.handler = async function (event) {
 
   const { name, email, subject, message } = body;
 
-  // 🧪 Logs de debug (à retirer après mise en prod)
-  console.log("Reçu :", { name, email, subject, message });
-  console.log("Clé API utilisée :", process.env.BREVO_API_KEY ? "[OK]" : "[ABSENTE]");
-  console.log("Destinataire :", process.env.DEST_EMAIL);
-
   try {
     await axios.post(
       "https://api.brevo.com/v3/smtp/email",
       {
-        sender: { name, email },
+        sender: { name: "Espace Trinité", email: "contact@espacetrinite.fr" },
         to: [{ email: process.env.DEST_EMAIL }],
         subject: subject || "Nouveau message via le site",
         htmlContent: `
@@ -45,7 +39,7 @@ exports.handler = async function (event) {
           <p><strong>Nom :</strong> ${name}</p>
           <p><strong>Email :</strong> ${email}</p>
           <p><strong>Sujet :</strong> ${subject}</p>
-          <p><strong>Message :</strong><br>${message}</p>
+          <p><strong>Message :</strong><br>${message.replace(/\n/g, "<br>")}</p>
         `
       },
       {
