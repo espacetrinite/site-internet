@@ -517,7 +517,7 @@ section h2 {
 }
 
 .map-placeholder {
-  background: #f7f7f7;
+  background: white;
   border: 3px solid white;
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
   min-height: 400px;
@@ -526,19 +526,29 @@ section h2 {
   justify-content: center;
   text-align: center;
   padding: 2rem;
-  font-family: inherit;
-  font-size: 0.95rem;
-  color: #333;
+  font-family: var(--font-main);
+  color: var(--noir);
+  font-size: 1rem;
+}
+
+.map-placeholder p {
+  margin: 0;
 }
 
 .map-placeholder button {
   margin-top: 1rem;
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1.5rem;
   background: black;
   color: white;
   border: none;
-  cursor: pointer;
   font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.map-placeholder button:hover {
+  background: var(--gris-clair);
 }
 
 /* ================================
@@ -1657,32 +1667,36 @@ body.no-scroll {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #000;
-  color: #fff;
-  padding: 12px 20px;
+  background: black;
+  color: white;
+  padding: 14px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   z-index: 1000;
   opacity: 0.95;
-}
-
-.cookie-banner p {
-  margin: 0;
+  font-family: var(--font-main);
 }
 
 .cookie-banner a {
-  color: #0cf;
+  color: var(--bleu);
   text-decoration: underline;
 }
 
 .cookie-banner button {
-  background: #fff;
-  color: #000;
+  background: white;
+  color: black;
   border: none;
-  padding: 6px 12px;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cookie-banner button:hover {
+  background: var(--gris-clair);
 }
 
 /* ================================
