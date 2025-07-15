@@ -1,24 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
   const consentGiven = localStorage.getItem("cookieAccepted") === "true";
-  const mapContainer = document.querySelector(".map-container");
+  const mapContainer = document.getElementById("map-container");
 
   if (!mapContainer) return;
 
   if (consentGiven) {
     loadMapIframe();
   } else {
-    // Create the placeholder message
     const placeholder = document.createElement("div");
     placeholder.className = "map-placeholder";
     placeholder.innerHTML = `
-      <div style="background:#f0f0f0;padding:2rem;text-align:center;font-family:sans-serif;">
+      <div>
         <p>Google Maps est désactivé pour respecter votre vie privée.</p>
-        <button id="activate-map" style="padding:0.5rem 1rem;background:black;color:white;border:none;cursor:pointer;">
-          Accepter et afficher la carte
-        </button>
+        <button id="activate-map">Accepter et afficher la carte</button>
       </div>
     `;
-    mapContainer.innerHTML = "";
     mapContainer.appendChild(placeholder);
 
     document.getElementById("activate-map").addEventListener("click", function () {
