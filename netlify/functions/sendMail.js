@@ -8,9 +8,17 @@ exports.handler = async function (event) {
     };
   }
 
-  const body = JSON.parse(event.body);
+  let body;
+  try {
+    body = JSON.parse(event.body);
+  } catch (e) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: "Corps de requête invalide" })
+    };
+  }
 
-  // 🔒 Sécurité : clé secrète
+  // 🔒 Vérification de la clé secrète
   if (!process.env.FORM_SECRET_KEY || body.secret !== process.env.FORM_SECRET_KEY) {
     return {
       statusCode: 403,
@@ -19,6 +27,11 @@ exports.handler = async function (event) {
   }
 
   const { name, email, subject, message } = body;
+
+  // 🧪 Logs de debug (à retirer après mise en prod)
+  console.log("Reçu :", { name, email, subject, message });
+  console.log("Clé API utilisée :", process.env.BREVO_API_KEY ? "[OK]" : "[ABSENTE]");
+  console.log("Destinataire :", process.env.DEST_EMAIL);
 
   try {
     await axios.post(
