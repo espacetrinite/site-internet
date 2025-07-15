@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     try {
-      const res = await fetch("/.netlify/functions/sendMail", {
+      const res = await fetch("/.netlify/functions/send-mail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
