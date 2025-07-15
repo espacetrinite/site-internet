@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // 🧠 Récupérer le token Turnstile
     const tokenField = document.querySelector(".cf-turnstile [name='cf-turnstile-response']");
     if (!tokenField || !tokenField.value) {
       alert("CAPTCHA non chargé.");
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const token = tokenField.value;
 
-    // 🔐 Vérification du CAPTCHA auprès du backend
+    // 🔐 Vérification auprès de la fonction Netlify validate-captcha
     try {
       const captchaRes = await fetch("/.netlify/functions/validate-captcha", {
         method: "POST",
@@ -32,9 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // ✅ CAPTCHA validé → envoyer les données à /send-mail
+    // ✅ CAPTCHA validé → envoyer le formulaire à /send-mail
     const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
+    const payload = {
+      ...Object.fromEntries(formData.entries()),
+      secret: "trinite-XuB23v9Ld8" // ou autre sécurité côté Brevo
+    };
 
     try {
       const res = await fetch("/.netlify/functions/send-mail", {
