@@ -9,5 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
   acceptBtn.addEventListener("click", function () {
     localStorage.setItem("cookieAccepted", "true");
     banner.style.display = "none";
+
+    // Déclenche aussi l’acceptation de la carte
+    localStorage.setItem("mapAccepted", "true");
+    const loadMapButton = document.getElementById("load-map");
+    if (loadMapButton) loadMapButton.click();
   });
 });
