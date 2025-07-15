@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
 
     const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
+
+    const payload = {
+      ...Object.fromEntries(formData.entries()),
+      secret: "trinite-XuB23v9Ld8" // même valeur que dans les variables Netlify
+    };
 
     try {
       const res = await fetch("/.netlify/functions/sendMail", {
