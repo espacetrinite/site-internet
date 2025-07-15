@@ -517,23 +517,25 @@ section h2 {
 }
 
 .map-placeholder {
-  padding: 2rem;
+  padding: 2rem 1rem;
   text-align: center;
-  background: white;
+  background: #fff;
   color: black;
   font-size: 1rem;
-  border: 3px solid white;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 3px solid black;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
 }
 
 .map-placeholder p {
   margin-bottom: 1rem;
-  font-weight: 400;
-  color: #000;
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
+/* Pour bouton déjà stylé */
 .map-placeholder .btn {
-  margin-top: 1rem;
   padding: 10px 20px;
   border: 3px solid black;
   font-weight: 500;
