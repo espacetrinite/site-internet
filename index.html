@@ -670,14 +670,18 @@
     <div class="container">
       <h2>CONTACT</h2>
       <p class="intro">Une question, une demande particulière ? Écrivez-nous, nous vous répondrons rapidement.</p>
-      
-      <form id="contact-form" class="contact-form">
+  
+      <form id="contact-form" class="contact-form" method="POST">
         <div class="form-grid">
           <input type="text" name="name" placeholder="Votre nom" required>
           <input type="email" name="email" placeholder="Votre email" required>
         </div>
         <input type="text" name="subject" placeholder="Objet" required>
         <textarea name="message" id="contact-message" placeholder="Votre message..." rows="6" required></textarea>
+  
+        <!-- ✅ CAPTCHA Turnstile -->
+        <div class="cf-turnstile" data-sitekey="CLÉ_DU_SITE"></div>
+  
         <button class="btn" type="submit">Envoyer le message</button>
       </form>
     </div>
@@ -771,7 +775,12 @@
     </div>
   </footer>
 
+  <!-- Script Cloudflare Turnstile -->
+  <!-- Ce script charge le CAPTCHA invisible de Cloudflare -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 </body>
+
 <div id="cookie-banner" class="cookie-banner">
   <p>Ce site utilise des cookies pour fonctionner correctement. <a href="mentions-legales.html" rel="nofollow" target="_blank">En savoir plus</a>.</p>
   <button id="cookie-accept">OK</button>
