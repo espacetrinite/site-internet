@@ -1,19 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const btn = document.getElementById("load-map");
-  const iframe = document.getElementById("google-map");
   const placeholder = document.getElementById("map-placeholder");
+  const iframe = document.getElementById("google-map");
+  const button = document.getElementById("load-map");
 
-  if (!btn || !iframe || !placeholder) return;
+  if (!placeholder || !iframe || !button) return;
 
-  // Si consentement déjà donné, on affiche directement la carte
-  if (localStorage.getItem("mapAccepted") === "true") {
+  function showMap() {
     placeholder.style.display = "none";
     iframe.style.display = "block";
   }
 
-  btn.addEventListener("click", function () {
+  // Chargement auto si accepté
+  if (localStorage.getItem("mapAccepted")) {
+    showMap();
+  }
+
+  button.addEventListener("click", function () {
     localStorage.setItem("mapAccepted", "true");
-    placeholder.style.display = "none";
-    iframe.style.display = "block";
+    showMap();
   });
 });
