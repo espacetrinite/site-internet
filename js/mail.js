@@ -4,11 +4,34 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const formData = new FormData(form);
+    // 🔐 Récupérer le token Turnstile
+    const tokenField = document.querySelector(".cf-turnstile [name='cf-turnstile-response']");
+    if (!tokenField) {
+      alert("Erreur : CAPTCHA non détecté.");
+      return;
+    }
 
+    const token = tokenField.value;
+
+    // 🛡️ Vérifier le CAPTCHA auprès de la fonction serverless
+    const captchaCheck = await fetch("/.netlify/functions/validate-captcha", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token })
+    });
+
+    const captchaResult = await captchaCheck.json();
+
+    if (!captchaResult.success) {
+      alert("Échec de la validation du CAPTCHA. Veuillez réessayer.");
+      return;
+    }
+
+    // ✅ Si CAPTCHA OK → envoyer le formulaire à Brevo
+    const formData = new FormData(form);
     const payload = {
       ...Object.fromEntries(formData.entries()),
-      secret: "trinite-XuB23v9Ld8" // même valeur que dans les variables Netlify
+      secret: "trinite-XuB23v9Ld8" // ta clé pour sécuriser côté Brevo
     };
 
     try {
