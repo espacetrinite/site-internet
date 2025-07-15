@@ -5,14 +5,24 @@ exports.handler = async function (event) {
     return { statusCode: 405, body: "Méthode non autorisée" };
   }
 
-  try {
-    const { name, email, subject, message } = JSON.parse(event.body);
+  const body = JSON.parse(event.body);
 
-    const res = await axios.post(
+  // 🔒 Vérification de la clé secrète
+  if (!process.env.FORM_SECRET_KEY || body.secret !== process.env.FORM_SECRET_KEY) {
+    return {
+      statusCode: 403,
+      body: JSON.stringify({ error: "Accès non autorisé" })
+    };
+  }
+
+  const { name, email, subject, message } = body;
+
+  try {
+    const response = await axios.post(
       "https://api.brevo.com/v3/smtp/email",
       {
-        sender: { name, email }, // Expéditeur affiché
-        to: [{ email: "contact@tondomaine.fr" }], // ⚠️ à adapter
+        sender: { name, email },
+        to: [{ email: process.env.DEST_EMAIL }],
         subject: subject || "Nouveau message via le site",
         htmlContent: `
           <h3>Message reçu via le site Espace Trinité</h3>
@@ -25,20 +35,3 @@ exports.handler = async function (event) {
       {
         headers: {
           "api-key": process.env.BREVO_API_KEY,
-          "Content-Type": "application/json"
-        }
-      }
-    );
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true })
-    };
-  } catch (err) {
-    console.error("Erreur Brevo :", err.response?.data || err.message);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Échec de l’envoi" })
-    };
-  }
-};
