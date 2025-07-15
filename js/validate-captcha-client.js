@@ -6,12 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ⏳ On attend que le CAPTCHA soit bien chargé
     const tokenField = document.querySelector("[name='cf-turnstile-response']");
-    if (!tokenField || !tokenField.value) {
-      alert("Veuillez patienter quelques secondes, le CAPTCHA se charge...");
-      return;
-    }
+    const token = tokenField?.value || "";
 
-    const token = tokenField.value;
 
     // 🔐 Vérification auprès de la fonction validate-captcha
     try {
