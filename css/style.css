@@ -35,6 +35,7 @@ section h2 {
 }
 
 .btn {
+  border-radius:0;
   display: inline-block;
   padding: 12px 22px;
   background-color: black;
