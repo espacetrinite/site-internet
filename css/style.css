@@ -1736,3 +1736,13 @@ body, p, li, a, span {
   font-weight: 500; /* correspond à medium */
 }
 
+button, .btn {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  touch-action: manipulation;
+  background-clip: padding-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
