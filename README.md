@@ -49,17 +49,6 @@ from = "http://*"
 to = "https://:host/:splat"
 status = 301
 force = true
-
-### 📄 Redirection HTTPS forcée
-
-La redirection HTTP ➝ HTTPS est gérée via le fichier `netlify.toml` :
-
-```toml
-[[redirects]]
-from = "http://*"
-to = "https://:host/:splat"
-status = 301
-force = true
 ```
 
 ---
