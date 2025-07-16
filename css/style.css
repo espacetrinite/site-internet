@@ -1131,7 +1131,6 @@ section h2 {
 .tarif-card.vert:hover {
   background: #00a859;
   color: white;
-  border-left-color: white;
 }
 
 /* === ORVES – BLEU === */
@@ -1141,7 +1140,6 @@ section h2 {
 .tarif-card.bleu:hover {
   background: #005bbb;
   color: white;
-  border-left-color: white;
 }
 
 /* === GOURSAT – ROUGE === */
@@ -1151,7 +1149,6 @@ section h2 {
 .tarif-card.rouge:hover {
   background: #b22222;
   color: white;
-  border-left-color: white;
 }
 
 /* === MESSIAEN – JAUNE === */
@@ -1161,7 +1158,6 @@ section h2 {
 .tarif-card.jaune:hover {
   background: #ffbc00;
   color: white;
-  border-left-color: white;
 }
 
 
