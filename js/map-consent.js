@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
   const placeholder = document.getElementById("map-placeholder");
   const iframe = document.getElementById("google-map");
   const button = document.getElementById("load-map");
@@ -10,14 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
     iframe.style.display = "block";
   }
 
-  // Si l'utilisateur clique manuellement sur le bouton
-  button.addEventListener("click", function () {
-    localStorage.setItem("mapAccepted", "true");
+  // Chargement automatique si consentement déjà donné
+  if (localStorage.getItem("mapAccepted")) {
     showMap();
-  });
+  }
 
-  // Écoute l'événement personnalisé déclenché après acceptation des cookies
-  document.addEventListener("consentGiven", function () {
+  // Affichage après clic
+  button.addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.setItem("mapAccepted", "true");
     showMap();
   });
 });
