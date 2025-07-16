@@ -1,42 +1,55 @@
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
   const banner = document.getElementById("cookie-banner");
   const acceptBtn = document.getElementById("cookie-accept");
   const mapPlaceholder = document.getElementById("map-placeholder");
   const iframe = document.getElementById("google-map");
   const loadMapButton = document.getElementById("load-map");
 
-  // 1. Afficher le bandeau cookie si non accepté
-  if (banner && !localStorage.getItem("cookieAccepted")) {
+  // Initialisation
+  const cookieAccepted = localStorage.getItem("cookieAccepted");
+  const mapAccepted = localStorage.getItem("mapAccepted");
+
+  // Affichage du bandeau
+  if (!cookieAccepted && banner) {
     banner.style.display = "flex";
   }
 
-  // 2. Clic sur OK du bandeau cookie
-  if (acceptBtn) {
-    acceptBtn.addEventListener("click", function () {
-      localStorage.setItem("cookieAccepted", "true");
-      banner.style.display = "none";
-
-      // Déclenche aussi l’acceptation de la map
-      localStorage.setItem("mapAccepted", "true");
-      if (loadMapButton) loadMapButton.click();
-    });
-  }
-
-  // 3. Gestion carte Google Maps
+  // Fonction d’affichage de la carte
   function showMap() {
     if (mapPlaceholder) mapPlaceholder.style.display = "none";
     if (iframe) iframe.style.display = "block";
   }
 
-  if (loadMapButton) {
-    loadMapButton.addEventListener("click", function () {
-      localStorage.setItem("mapAccepted", "true");
-      showMap();
-    });
+  // Gestion du clic "OK" sur le bandeau
+  if (acceptBtn) {
+    acceptBtn.onclick = function () {
+      try {
+        localStorage.setItem("cookieAccepted", "true");
+        banner.style.display = "none";
+
+        // Déclenche l’acceptation de la carte aussi
+        localStorage.setItem("mapAccepted", "true");
+        showMap();
+      } catch (e) {
+        console.warn("Erreur stockage local : ", e);
+      }
+    };
   }
 
-  // 4. Chargement automatique si déjà accepté
-  if (localStorage.getItem("mapAccepted")) {
+  // Gestion du clic "Afficher la carte"
+  if (loadMapButton) {
+    loadMapButton.onclick = function () {
+      try {
+        localStorage.setItem("mapAccepted", "true");
+        showMap();
+      } catch (e) {
+        console.warn("Erreur stockage local : ", e);
+      }
+    };
+  }
+
+  // Chargement automatique de la carte si déjà accepté
+  if (mapAccepted) {
     showMap();
   }
 });
