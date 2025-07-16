@@ -11,7 +11,6 @@ window.addEventListener("load", function () {
     localStorage.setItem("mapAccepted", "true");
     banner.style.display = "none";
 
-    // Déclenche le chargement de la carte si le bouton existe
     const loadMapButton = document.getElementById("load-map");
     if (loadMapButton) loadMapButton.click();
   });
