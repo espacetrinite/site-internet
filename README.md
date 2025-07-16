@@ -22,6 +22,25 @@ L'ensemble est optimisé pour un hébergement statique sécurisé avec **formula
 
 ---
 
+## 🧭 Structure du site
+
+La navigation de la page d’accueil (`index.html`) est organisée en 7 sections principales, accessibles via le menu :
+
+1. `#accueil` — Introduction, slogan, visuel et lien rapide vers les salles
+2. `#apropos` — Présentation du lieu et de son histoire
+3. `#salles` — Aperçu des différentes salles disponibles
+4. `#galerie` — Galerie photo interactive par salle
+5. `#tarifs` — Informations tarifaires
+6. `#restauration` — Options de restauration (traiteurs, partenaires)
+7. `#contact` — Formulaire de contact sécurisé
+
+Deux pages autonomes complètent le site :
+
+- `mentions-legales.html` — Mentions légales et informations d’édition
+- `confidentialite.html` — Politique de confidentialité (conforme RGPD)
+
+---
+
 ## 🧾 Informations techniques
 
 ### 🔐 Domaine et DNS
@@ -76,37 +95,38 @@ Deux fonctions serverless assurent la sécurité :
 ## 📁 Arborescence du projet
 
 ```
-espace-trinite/
+espacetrinite/
 ├── assets/
-│   ├── favicon/         # Favicon du site
-│   ├── icons/           # Icônes utilisées
-│   ├── img/             # Images des galeries
-│   └── logo/            # Logos
+│   ├── favicon/             # Favicon du site
+│   ├── icons/               # Icônes utilisées
+│   ├── img/                 # Images des galeries
+│   └── logo/                # Logos
 │
 ├── css/
-│   ├── style.css        # Style global du site
-│   └── header.css       # Style spécifique à l'en-tête
+│   ├── style.css            # Style global du site
+│   └── header.css           # Style spécifique à l'en-tête
 │
 ├── js/
 │   ├── mail.js              # Gestion du formulaire et validation CAPTCHA
 │   ├── header.js            # Animation du menu sticky
 │   ├── galerie.js           # Gestion des galeries par salle
 │   ├── assistant.js         # Mini assistant de recherche de salle
-│   ├── cookie-consent.js    # Gestion du bandeau cookies (RGPD)
-│   └── map-consent.js       # Affichage conditionnel de la carte Maps
+│   └── consent.js           # Gestion unifiée : bandeau cookies + carte Maps
 │
 ├── netlify/
 │   └── functions/
 │       ├── send-mail.js         # Envoi sécurisé via SMTP API (Brevo)
 │       └── validate-captcha.js  # Validation Cloudflare Turnstile côté serveur
 │
-├── index.html                # Page principale
-├── mentions-legales.html     # Page RGPD / légale
-├── confidentialite.html      # Politique de confidentialité
-├── 404.html                  # Page d’erreur personnalisée
-├── netlify.toml              # Configuration Netlify
-├── package.json              # Dépendances backend (axios)
-└── README.md                 # Présentation du projet
+├── index.html                  # Page principale
+├── mentions-legales.html       # Mentions légales (page RGPD)
+├── confidentialite.html        # Politique de confidentialité
+├── 404.html                    # Page d’erreur personnalisée
+├── sitemap.xml                 # Plan du site pour les moteurs de recherche
+├── robots.txt                  # Instructions SEO pour les robots d'indexation
+├── netlify.toml                # Configuration Netlify (redirects, build, etc.)
+├── package.json                # Dépendances backend (axios)
+└── README.md                   # Présentation du projet
 ```
 
 ---
