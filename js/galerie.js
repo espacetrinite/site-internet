@@ -9,29 +9,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const navButtons = document.querySelectorAll(".gallery-nav button");
   const slides     = document.querySelectorAll(".gallery-slide");
 
-  /** Affiche le slide n et met à jour le bouton actif */
   function showSlide(n){
-    slides.forEach( (s,i) => s.classList.toggle("active", i === n) );
-    navButtons.forEach( (b,i) => b.classList.toggle("active", i === n) );
+    slides.forEach((s, i) => s.classList.toggle("active", i === n));
+    navButtons.forEach((b, i) => b.classList.toggle("active", i === n));
   }
 
-  // init : slide 0
   showSlide(0);
 
-  // clic sur les boutons
-  navButtons.forEach( (btn,i) =>
+  navButtons.forEach((btn, i) =>
     btn.addEventListener("click", () => showSlide(i))
   );
 
   /* ------------------------------------------------------------------
-     2. Accès direct via #hash  (ex. https://.../#goursat)
+     2. Accès direct via #hash
   ------------------------------------------------------------------ */
   const idToIndex = {
     "#accueil-": 0,
     "#goursat": 1,
     "#orves":   2,
-    "#messiaen":3,
-    "#labruyere":4
+    "#messiaen": 3,
+    "#labruyere": 4
   };
 
   const initialHash = window.location.hash;
@@ -40,38 +37,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ------------------------------------------------------------------
-     3. Liens internes « Plus de photos » (href="#goursat", etc.)
+     3. Liens internes « Plus de photos »
   ------------------------------------------------------------------ */
   document.querySelectorAll('a[href^="#"]').forEach(link => {
-    const idx = idToIndex[ link.getAttribute("href") ];
+    const idx = idToIndex[link.getAttribute("href")];
     if (idx !== undefined){
       link.addEventListener("click", e => {
         e.preventDefault();
-        document.getElementById("galerie")?.scrollIntoView({behavior:"smooth"});
+        document.getElementById("galerie")?.scrollIntoView({ behavior: "smooth" });
         showSlide(idx);
       });
     }
   });
 
   /* ------------------------------------------------------------------
-     4. ZOOM AVEC FLÈCHES & CLAVIER – desktop only (>768 px)
+     4. ZOOM — activé pour tous les écrans
   ------------------------------------------------------------------ */
-  if (window.innerWidth > 768){
-    document.querySelectorAll(".gallery-mosaic img").forEach(img=>{
-      img.addEventListener("click", () => {
-        if (document.getElementById("zoom-viewer")) return;  // déjà ouvert
-        openZoom(img);
-      });
+  document.querySelectorAll(".gallery-mosaic img").forEach(img => {
+    img.addEventListener("click", () => {
+      if (document.getElementById("zoom-viewer")) return;
+      openZoom(img);
     });
-  }
+  });
 
-  /** Ouvre l’overlay zoom pour l’image cliquée */
   function openZoom(imgClicked){
-    const slide   = imgClicked.closest(".gallery-slide");
-    const images  = Array.from(slide.querySelectorAll("img"));
-    let   index   = images.indexOf(imgClicked);
+    const slide  = imgClicked.closest(".gallery-slide");
+    const images = Array.from(slide.querySelectorAll("img"));
+    let index    = images.indexOf(imgClicked);
 
-    // overlay
     const viewer = document.createElement("div");
     viewer.id = "zoom-viewer";
     viewer.innerHTML = `
@@ -85,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevBtn = viewer.querySelector(".zoom-prev");
     const nextBtn = viewer.querySelector(".zoom-next");
 
-    const update  = () => {
+    const update = () => {
       imgEl.src = images[index].src;
       imgEl.alt = images[index].alt || "";
     };
@@ -102,15 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
       update();
     });
 
-    // clavier ← → Esc
     const keyHandler = e => {
-      if (e.key === "ArrowLeft")  prevBtn.click();
+      if (e.key === "ArrowLeft") prevBtn.click();
       if (e.key === "ArrowRight") nextBtn.click();
-      if (e.key === "Escape")     closeViewer();
+      if (e.key === "Escape") closeViewer();
     };
     document.addEventListener("keydown", keyHandler);
 
-    // clic hors image = fermeture
     viewer.addEventListener("click", e => {
       if (e.target === viewer) closeViewer();
     });
