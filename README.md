@@ -38,7 +38,18 @@ L'ensemble est optimisé pour un hébergement statique sécurisé avec **formula
 | A      | espacetrinite.fr  | `75.2.60.5` *(Netlify)*          | ❌ DNS uniquement | Automatique |
 | CNAME  | www               | `espacetrinite.netlify.app`      | ❌ DNS uniquement | Automatique |
 
-> 💡 **Proxy désactivé** pour garantir la bonne gestion du HTTPS automatique par Netlify.
+> 💡 **Entrées DNS en mode "DNS uniquement"** (proxy Cloudflare désactivé) pour permettre à Netlify de gérer directement le HTTPS, en complément du chiffrement SSL/TLS automatique de Cloudflare.
+
+### 📄 Redirection HTTPS forcée
+
+La redirection HTTP ➝ HTTPS est gérée via le fichier `netlify.toml` :
+
+```toml
+[[redirects]]
+from = "http://*"
+to = "https://:host/:splat"
+status = 301
+force = true
 
 ---
 
