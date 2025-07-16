@@ -4,15 +4,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!localStorage.getItem("cookieAccepted")) {
     banner.style.display = "flex";
+  } else {
+    // Carte déjà acceptée ? → l’afficher
+    if (localStorage.getItem("mapAccepted")) {
+      const event = new Event("consentGiven");
+      document.dispatchEvent(event);
+    }
   }
 
   acceptBtn.addEventListener("click", function () {
     localStorage.setItem("cookieAccepted", "true");
     banner.style.display = "none";
 
-    // Déclenche aussi l’acceptation de la carte
+    // Consentement pour la carte
     localStorage.setItem("mapAccepted", "true");
-    const loadMapButton = document.getElementById("load-map");
-    if (loadMapButton) loadMapButton.click();
+
+    const event = new Event("consentGiven");
+    document.dispatchEvent(event);
   });
 });
