@@ -518,7 +518,6 @@ section h2 {
   display: block;
 }
 
-/* Placeholder même hauteur que l'iframe */
 .map-placeholder {
   min-height: 400px;
   display: flex;
@@ -532,12 +531,14 @@ section h2 {
   font-size: 0.95rem;
   font-weight: 500;
   color: black;
+  pointer-events: auto; /* iOS fix */
+  -webkit-tap-highlight-color: transparent; /* iOS tap highlight fix */
 }
 
 .map-placeholder p {
   margin-bottom: 1rem;
   line-height: 1.4;
-  color: black; /* Forcer le noir */
+  color: black;
 }
 
 .map-placeholder .btn {
@@ -549,6 +550,10 @@ section h2 {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s ease, color 0.3s ease;
+  appearance: none;             /* Safari iOS fix */
+  -webkit-appearance: none;     /* Safari iOS fix */
+  pointer-events: auto;
+  touch-action: manipulation;   /* optimise la gestion du toucher */
 }
 
 .map-placeholder .btn:hover {
@@ -1680,9 +1685,11 @@ body.no-scroll {
   justify-content: space-between;
   align-items: center;
   font-size: 0.85rem;
-  z-index: 1000;
+  z-index: 9999; /* z-index élevé essentiel sur iOS Safari */
   opacity: 0.95;
   font-family: var(--font-main);
+  pointer-events: auto; /* garantit que les clics sont pris en compte */
+  flex-wrap: wrap;
 }
 
 .cookie-banner a {
@@ -1699,6 +1706,9 @@ body.no-scroll {
   color: white;
   cursor: pointer;
   transition: background 0.3s ease, color 0.3s ease;
+  appearance: none; /* fix iOS */
+  -webkit-appearance: none; /* fix iOS Safari */
+  pointer-events: auto;
 }
 
 .cookie-banner button:hover {
