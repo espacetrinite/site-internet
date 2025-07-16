@@ -1,4 +1,3 @@
-
 # 🌿 Espace Trinité — Site vitrine
 
 Bienvenue sur le dépôt du site vitrine d’Espace Trinité, conçu pour offrir une expérience fluide, élégante et informative à tous les visiteurs souhaitant découvrir les différentes salles disponibles à la location.
