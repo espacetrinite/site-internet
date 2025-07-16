@@ -50,6 +50,18 @@ to = "https://:host/:splat"
 status = 301
 force = true
 
+### 📄 Redirection HTTPS forcée
+
+La redirection HTTP ➝ HTTPS est gérée via le fichier `netlify.toml` :
+
+```toml
+[[redirects]]
+from = "http://*"
+to = "https://:host/:splat"
+status = 301
+force = true
+```
+
 ---
 
 ## ✉️ Formulaire de contact sécurisé
@@ -58,16 +70,16 @@ Le formulaire est protégé contre les spams via [Cloudflare Turnstile](https://
 
 ### 🔒 Variables d’environnement Netlify requises
 
-| Clé               | Description                                   |
-|------------------|-----------------------------------------------|
-| `TURNSTILE_SECRET` | Clé secrète Cloudflare Turnstile              |
-| `FORM_SECRET_KEY` | Clé partagée utilisée côté client + fonction  |
-| `BREVO_API_KEY`   | Clé API Brevo pour l’envoi d’emails sécurisés |
-| `DEST_EMAIL`      | Adresse de destination pour les messages      |
+| Clé                | Description                                      |
+|--------------------|--------------------------------------------------|
+| `TURNSTILE_SECRET` | Clé secrète Cloudflare Turnstile                 |
+| `FORM_SECRET_KEY`  | Clé partagée utilisée côté client + fonction     |
+| `BREVO_API_KEY`    | Clé API Brevo pour l’envoi d’emails sécurisés    |
+| `DEST_EMAIL`       | Adresse de destination pour les messages         |
 
 Deux fonctions serverless assurent la sécurité :
 
-- `/functions/validate-captcha.js` → Vérifie le CAPTCHA côté serveur
+- `/functions/validate-captcha.js` → Vérifie le CAPTCHA côté serveur  
 - `/functions/send-mail.js` → Envoie l’email en POST sécurisé à Brevo
 
 ---
