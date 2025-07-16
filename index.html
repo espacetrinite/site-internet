@@ -782,6 +782,65 @@
       </nav>
     </div>
   </footer>
+  <script>
+  (function () {
+    // fallback IE/old Safari
+    const ready = (cb) => {
+      if (document.readyState !== "loading") cb();
+      else document.addEventListener("DOMContentLoaded", cb);
+    };
+  
+    ready(function () {
+      const cookieBanner = document.getElementById("cookie-banner");
+      const cookieAccept = document.getElementById("cookie-accept");
+  
+      const placeholder   = document.getElementById("map-placeholder");
+      const iframe        = document.getElementById("google-map");
+      const loadMapBtn    = document.getElementById("load-map");
+  
+      // Vérifie consentement cookies
+      const cookieAccepted = window.localStorage.getItem("cookieAccepted") === "true";
+      const mapAccepted    = window.localStorage.getItem("mapAccepted") === "true";
+  
+      if (!cookieAccepted) {
+        cookieBanner.style.display = "flex";
+      } else {
+        cookieBanner.style.display = "none";
+      }
+  
+      if (mapAccepted) {
+        displayMap();
+      }
+  
+      if (cookieAccept) {
+        cookieAccept.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.localStorage.setItem("cookieAccepted", "true");
+          window.localStorage.setItem("mapAccepted", "true");
+          cookieBanner.style.display = "none";
+          displayMap();
+        });
+      }
+  
+      if (loadMapBtn) {
+        loadMapBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.localStorage.setItem("mapAccepted", "true");
+          displayMap();
+        });
+      }
+  
+      function displayMap() {
+        if (placeholder) placeholder.style.display = "none";
+        if (iframe) {
+          iframe.style.display = "block";
+          // Forcer reflow (Safari fix)
+          iframe.offsetHeight;
+        }
+      }
+    });
+  })();
+  </script>
 
 </body>
 
