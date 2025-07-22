@@ -17,53 +17,51 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =========  Données salles  ========= */
-  const rooms = [
-    {
-      id: "messiaen",
-      name: "Salle Olivier Messiaen",
-      max: 65, min: 20, pmr: false,
-      eventTypes: [
-        { type: "conference", label: "Conférence",       capacity: 65 },
-        { type: "reunion",    label: "Réunion en U",     capacity: 40 },
-        { type: "classe",     label: "Salle de classe",  capacity: 38 }
-      ],
-      pricing: { heure: 190, demi: 540, journee: 740 }
-    },
-    {
-      id: "bruyere",
-      name: "Salle La Bruyère",
-      max: 50, min: 10, pmr: true,
-      eventTypes: [
-        { type: "conference", label: "Conférence",       capacity: 50 },
-        { type: "reunion",    label: "Réunion en U",     capacity: 30 },
-        { type: "classe",     label: "Salle de classe",  capacity: 30 }
-      ],
-      pricing: { heure: 200, demi: 580, journee: 800 }
-    },
-    {
-      id: "goursat",
-      name: "Salle Pierre Goursat",
-      max: 25, min: 10, pmr: false,
-      eventTypes: [
-        { type: "conference", label: "Conférence",       capacity: 25 },
-        { type: "reunion",    label: "Réunion en U",     capacity: 18 },
-        { type: "classe",     label: "Salle de classe",  capacity: 20 }
-      ],
-      pricing: { heure: 150, demi: 460, journee: 640 }
-    },
-    {
-      id: "orves",
-      name: "Salle Estienne d'Orves",
-      max: 25, min: 6, pmr: false,
-      eventTypes: [
-        { type: "conference", label: "Conférence",       capacity: 20 },
-        { type: "reunion",    label: "Réunion en U",     capacity: 16 },
-        { type: "classe",     label: "Salle de classe",  capacity: 18 }
-      ],
-      pricing: { heure: 140, demi: 405, journee: 580 }
-    }
-  ];
-  
+  /* ========== Chargement dynamique des tarifs depuis le fichier Excel ========== */
+  const rooms = [];
+
+  fetch("/tarifs_salles.xlsx")
+    .then(res => res.arrayBuffer())
+    .then(data => {
+      const wb = XLSX.read(data, { type: "array" });
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(sheet);
+
+      rows.forEach(row => {
+        const name = row["Nom de la salle"];
+        const id = name.toLowerCase().split(" ").pop().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’']/g, "").replace(/\s+/g, "");
+        const pricing = {
+          journee: row["Journée (€)"],
+          demi: row["Demi-journée (€)"],
+          heure: row["Tarif horaire (€)"]
+        };
+
+        // correspondance simplifiée par nom
+        const defaultConfig = {
+          messiaen: { max: 65, min: 1, pmr: false },
+          bruyere:  { max: 50, min: 1, pmr: true },
+          goursat:  { max: 25, min: 1, pmr: false },
+          orves:    { max: 25, min: 1,  pmr: false }
+        };
+
+        const conf = defaultConfig[id] || { max: 30, min: 10, pmr: false };
+
+        rooms.push({
+          id,
+          name,
+          max: conf.max,
+          min: conf.min,
+          pmr: conf.pmr,
+          eventTypes: [
+            { type: "conference", label: "Conférence",       capacity: conf.max },
+            { type: "reunion",    label: "Réunion en U",     capacity: Math.floor(conf.max * 0.6) },
+            { type: "classe",     label: "Salle de classe",  capacity: Math.floor(conf.max * 0.55) }
+          ],
+          pricing
+        });
+      });
+    });
+
   let pageScrollY = 0;
 
   const openAssistant = () => {
@@ -213,5 +211,4 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => contactSection?.scrollIntoView({ behavior: "smooth" }), 50);
     }, { once: true });
   });
-
 });
