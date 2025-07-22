@@ -19,7 +19,7 @@ L'ensemble est optimisé pour un hébergement statique sécurisé avec **formula
 - **Fonctions serverless Netlify**
 - **Cloudflare Turnstile (CAPTCHA anti-spam sécurisé)**
 - **Brevo (ex-Sendinblue) – Envoi d’email via API**
-- **SheetJS (XLSX)** – Chargement dynamique des tarifs depuis un fichier Excel
+- **SheetJS (XLSX) – Chargement dynamique des tarifs depuis un fichier Excel**
   
 ---
 
