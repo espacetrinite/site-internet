@@ -19,6 +19,29 @@ L'ensemble est optimisé pour un hébergement statique sécurisé avec **formula
 - **Fonctions serverless Netlify**
 - **Cloudflare Turnstile (CAPTCHA anti-spam sécurisé)**
 - **Brevo (ex-Sendinblue) – Envoi d’email via API**
+- **SheetJS (XLSX)** – Chargement dynamique des tarifs depuis un fichier Excel
+  
+---
+
+## 💰 Gestion dynamique des tarifs
+
+Les tarifs des salles ne sont plus codés en dur dans le HTML ou JavaScript.  
+Ils sont désormais chargés dynamiquement depuis un fichier Excel (`tarifs_salles.xlsx`) via la bibliothèque **SheetJS**.
+
+Ce fichier contient les prix à jour pour chaque salle, au format :
+
+| Nom de la salle            | Journée (€) | Demi-journée (€) | Tarif horaire (€) |
+|----------------------------|-------------|------------------|-------------------|
+| Salle Pierre Goursat       | 640         | 460              | 150               |
+| Salle Etienne d'Orves      | 580         | 405              | 140               |
+| Salle Messiaen             | 740         | 540              | 190               |
+| Salle La Bruyère           | 800         | 580              | 200               |
+
+Ces données alimentent :
+- la section **Tarifs** de la page d’accueil (grille responsive),
+- le **mini-assistant** d’aide à la réservation.
+
+> ✅ Plus besoin de modifier le code pour ajuster les prix : une mise à jour du fichier `.xlsx` suffit.
 
 ---
 
@@ -34,10 +57,11 @@ La navigation de la page d’accueil (`index.html`) est organisée en 7 sections
 6. `#restauration` — Options de restauration (traiteurs, partenaires)
 7. `#contact` — Formulaire de contact sécurisé
 
-Deux pages autonomes complètent le site :
+Trois pages autonomes complètent le site :
 
 - `mentions-legales.html` — Mentions légales et informations d’édition
 - `confidentialite.html` — Politique de confidentialité (conforme RGPD)
+- `conditions.html` — Conditions générales de vente (location de salles)
 
 ---
 
@@ -97,36 +121,39 @@ Deux fonctions serverless assurent la sécurité :
 ```
 espacetrinite/
 ├── assets/
-│   ├── favicon/             # Favicon du site
-│   ├── icons/               # Icônes utilisées
-│   ├── img/                 # Images des galeries
-│   └── logo/                # Logos
+│   ├── favicon/                  # Favicon du site
+│   ├── icons/                    # Icônes utilisées
+│   ├── img/                      # Images des galeries
+│   └── logo/                     # Logos
 │
 ├── css/
-│   ├── style.css            # Style global du site
-│   └── header.css           # Style spécifique à l'en-tête
+│   ├── style.css                 # Style global du site
+│   └── header.css                # Style spécifique à l'en-tête
 │
 ├── js/
-│   ├── mail.js              # Gestion du formulaire et validation CAPTCHA
-│   ├── header.js            # Animation du menu sticky
-│   ├── galerie.js           # Gestion des galeries par salle
-│   ├── assistant.js         # Mini assistant de recherche de salle
-│   └── consent.js           # Gestion unifiée : bandeau cookies + carte Maps
+│   ├── mail.js                   # Gestion du formulaire et validation CAPTCHA
+│   ├── header.js                 # Animation du menu sticky
+│   ├── galerie.js                # Gestion des galeries par salle
+│   ├── consent.js                # Gestion unifiée : bandeau cookies + carte Maps
+│   ├── assistant_dynamic.js      # Assistant de recherche de salle avec tarifs dynamiques
+│   └── tarifs_dynamic_loader.js  # Chargement dynamique des tarifs depuis un fichier Excel
 │
 ├── netlify/
 │   └── functions/
-│       ├── send-mail.js         # Envoi sécurisé via SMTP API (Brevo)
-│       └── validate-captcha.js  # Validation Cloudflare Turnstile côté serveur
+│       ├── send-mail.js          # Envoi sécurisé via SMTP API (Brevo)
+│       └── validate-captcha.js   # Validation Cloudflare Turnstile côté serveur
 │
-├── index.html                  # Page principale
-├── mentions-legales.html       # Mentions légales (page RGPD)
-├── confidentialite.html        # Politique de confidentialité
-├── 404.html                    # Page d’erreur personnalisée
-├── sitemap.xml                 # Plan du site pour les moteurs de recherche
-├── robots.txt                  # Instructions SEO pour les robots d'indexation
-├── netlify.toml                # Configuration Netlify (redirects, build, etc.)
-├── package.json                # Dépendances backend (axios)
-└── README.md                   # Présentation du projet
+├── index.html                    # Page principale
+├── mentions-legales.html         # Mentions légales (page RGPD)
+├── confidentialite.html          # Politique de confidentialité
+├── conditions.html               # Conditions générales de vente
+├── 404.html                      # Page d’erreur personnalisée
+├── tarifs_salles.xlsx            # Fichier source des tarifs des salles (Excel)
+├── sitemap.xml                   # Plan du site pour les moteurs de recherche
+├── robots.txt                    # Instructions SEO pour les robots d'indexation
+├── netlify.toml                  # Configuration Netlify (redirects, build, etc.)
+├── package.json                  # Dépendances backend (axios)
+└── README.md                     # Présentation du projet
 ```
 
 ---
@@ -167,6 +194,7 @@ Plateformes compatibles :
 
 - `mentions-legales.html` → Obligations légales
 - `confidentialite.html` → Politique de confidentialité (RGPD)
+- `conditions.html` → Conditions générales de vente (location de salles)
 
 ---
 
