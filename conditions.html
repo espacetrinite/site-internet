@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conditions générales de vente – Espace Trinité</title>
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/header.js"></script>
+  <script src="js/script.js"></script>
+  <style>
+    #conditions {
+      background: black;
+      color: white;
+      padding: 120px 40px;
+      min-height: 100vh;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 24px;
+    }
+
+    #conditions h1, 
+    #conditions h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    #conditions p, #conditions li {
+      font-size: 1.2rem;
+      font-weight: 300;
+      max-width: 800px;
+      margin-bottom: 10px;
+    }
+
+    #conditions li {
+      margin-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      #conditions {
+        padding: 100px 20px;
+      }
+
+      #conditions h1 {
+        font-size: 2rem;
+      }
+
+      #conditions p, #conditions li {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header id="site-header" role="banner">
+    <div class="container">
+      <a href="index.html" class="brand-link" title="Retour à l'accueil Espace Trinité">
+        <img src="assets/logo/petit-logo.png" alt="Logo Espace Trinité - Location de salles à Paris 9" class="logo-accueil" loading="lazy">
+      </a>
+
+      <nav role="navigation" aria-label="Menu principal">
+        <div class="burger" aria-label="Ouvrir le menu de navigation" aria-expanded="false" tabindex="0">
+          <span></span><span></span><span></span>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="index.html#accueil">Accueil</a></li>
+          <li><a href="index.html#apropos">À propos</a></li>
+          <li><a href="index.html#salles">Salles</a></li>
+          <li><a href="index.html#galerie">Galerie</a></li>
+          <li><a href="index.html#tarifs">Tarifs</a></li>
+          <li><a href="index.html#restauration">Restauration</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== CONDITIONS GÉNÉRALES DE VENTE ===== -->
+  <section id="conditions" aria-labelledby="conditions-title">
+    <div class="container">
+      <h1 id="conditions-title">📄 Conditions générales de vente</h1>
+      <p><strong>Dernière mise à jour :</strong> 22 juillet 2025</p>
+
+      <h2>Article 1 :</h2>
+      <p>Les salles sont situées au 3, rue de La Trinité – 75009 Paris et sont disponibles du lundi au vendredi. Elles peuvent, à titre exceptionnel, être ouvertes le samedi.</p>
+
+      <h2>Article 2 :</h2>
+      <p>Toute réservation sera considérée comme ferme et définitive dès lors qu’elle aura été accompagnée du versement de l’acompte indiqué sur le devis ou d’un bon de commande signé. Le devis signé avec cachet vaut acceptation des présentes conditions générales.</p>
+
+      <h2>Article 3 :</h2>
+      <p>En cas d’annulation, des frais seront facturés :</p>
+      <ul>
+        <li>Moins de 7 jours ouvrables avant la date : 100 % du montant TTC</li>
+        <li>Entre 7 et 20 jours ouvrables avant la date : 50 % du montant TTC</li>
+      </ul>
+
+      <h2>Article 4 :</h2>
+      <p>Escompte pour règlement anticipé : 0%.<br>
+      En cas de retard de paiement, une pénalité au taux BCE + 10 points sera appliquée, avec indemnité forfaitaire de 40 €.</p>
+
+      <h2>Article 5 :</h2>
+      <p>DCT se réserve le droit de résilier une prestation sans préavis si celle-ci est contraire à la destination des lieux, à l’ordre public ou aux bonnes mœurs.</p>
+
+      <h2>Article 6 :</h2>
+      <p>DCT décline toute responsabilité en cas de vol ou dommage sur les effets du preneur. Le preneur doit s'assurer que la salle est bien fermée à chaque pause.</p>
+
+      <h2>Article 7 :</h2>
+      <p>Le preneur doit souscrire une assurance responsabilité civile pour couvrir les biens, personnes et éventuels dégâts. Toute dégradation sera facturée intégralement.</p>
+
+      <h2>Article 8 :</h2>
+      <p>Tout litige relève de la compétence exclusive du Tribunal de Commerce de Paris.</p>
+
+      <h2>Article 9 :</h2>
+      <p>Il est interdit de fumer ou vapoter dans les lieux affectés à un usage collectif (décret n°2006-1386 du 15 novembre 2006).</p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer role="contentinfo">
+    <div class="container">
+      <p>&copy; Espace Trinité</p>
+      <nav aria-label="Liens de bas de page">
+        <a href="mentions-legales.html" rel="nofollow">Mentions légales</a>
+        <a href="confidentialite.html" rel="nofollow">Politique de confidentialité</a>
+        <a href="conditions.html" rel="nofollow">Conditions générales de vente</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>
