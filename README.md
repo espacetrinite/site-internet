@@ -33,7 +33,7 @@ Ce fichier contient les prix à jour pour chaque salle, au format :
 | Nom de la salle            | Journée (€) | Demi-journée (€) | Tarif horaire (€) |
 |----------------------------|-------------|------------------|-------------------|
 | Salle Pierre Goursat       | 640         | 460              | 150               |
-| Salle Etienne d'Orves      | 580         | 405              | 140               |
+| Salle d'Estienne d'Orves      | 580         | 405              | 140               |
 | Salle Messiaen             | 740         | 540              | 190               |
 | Salle La Bruyère           | 800         | 580              | 200               |
 
