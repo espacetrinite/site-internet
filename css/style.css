@@ -190,14 +190,12 @@ section h2 {
   }
 }
 
-
 /* ---- TÉLÉPHONE TRÈS ÉTROIT ---- */
 @media (max-width: 480px) {
   .photo-item {
     flex: 0 0 90%;
   }
 }
-
 
 /* ===========================================================
    CAPACITÉS — Cartes harmonisées avec .tarif-card
@@ -380,11 +378,12 @@ section h2 {
 ================================ */
 .apropos-icons {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px 60px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0;
   margin: 40px auto;
-  max-width: 900px;
+  max-width: 1100px;
 }
 
 .apropos-icons .icon-box {
@@ -394,6 +393,7 @@ section h2 {
   text-align: center;
   color: white;
   width: 180px;
+  flex: 0 0 auto;
 }
 
 .apropos-icons .icon-box i {
@@ -413,6 +413,20 @@ section h2 {
 /* ================================
    RESPONSIVE ICONES
 ================================ */
+
+@media (max-width: 1024px) {
+  .apropos-icons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px 40px;
+    max-width: 900px;
+  }
+
+  .apropos-icons .icon-box {
+    width: 180px;
+  }
+}
+
 @media (max-width: 768px) {
   .apropos-icons {
     justify-content: space-around;
@@ -420,7 +434,7 @@ section h2 {
   }
 
   .apropos-icons .icon-box {
-    width: 45%; /* 2 colonnes */
+    width: 45%;
   }
 
   .apropos-icons .icon-box i {
@@ -436,7 +450,7 @@ section h2 {
 
 @media (max-width: 480px) {
   .apropos-icons .icon-box {
-    width: 100%; /* 1 par ligne sur petit mobile */
+    width: 100%;
   }
 }
 
