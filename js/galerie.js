@@ -68,15 +68,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const viewer = document.createElement("div");
     viewer.id = "zoom-viewer";
     viewer.innerHTML = `
-      <span class="zoom-arrow zoom-prev">&#10094;</span>
+      <button class="zoom-close" aria-label="Fermer">&#10005;</button>
+      <button class="zoom-arrow zoom-prev" aria-label="Photo précédente">&#10094;</button>
       <img src="${imgClicked.src}" alt="${imgClicked.alt}">
-      <span class="zoom-arrow zoom-next">&#10095;</span>
+      <button class="zoom-arrow zoom-next" aria-label="Photo suivante">&#10095;</button>
     `;
     document.body.appendChild(viewer);
 
-    const imgEl   = viewer.querySelector("img");
-    const prevBtn = viewer.querySelector(".zoom-prev");
-    const nextBtn = viewer.querySelector(".zoom-next");
+    const imgEl    = viewer.querySelector("img");
+    const prevBtn  = viewer.querySelector(".zoom-prev");
+    const nextBtn  = viewer.querySelector(".zoom-next");
+    const closeBtn = viewer.querySelector(".zoom-close");
 
     const update = () => {
       imgEl.src = images[index].src;
@@ -101,6 +103,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Escape") closeViewer();
     };
     document.addEventListener("keydown", keyHandler);
+
+    closeBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      closeViewer();
+    });
 
     viewer.addEventListener("click", e => {
       if (e.target === viewer) closeViewer();
