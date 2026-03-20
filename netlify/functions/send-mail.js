@@ -25,7 +25,13 @@ exports.handler = async function (event) {
     };
   }
 
-  const { name, email, subject, message } = body;
+  const { name, email, phone, salle, date, guests, message } = body;
+
+  const subjectLine = [
+    "Demande via le site",
+    salle  ? `– ${salle}` : "",
+    date   ? `– ${date}`  : ""
+  ].filter(Boolean).join(" ");
 
   try {
     await axios.post(
@@ -33,12 +39,15 @@ exports.handler = async function (event) {
       {
         sender: { name: "Espace Trinité", email: "contact@espacetrinite.fr" },
         to: [{ email: process.env.DEST_EMAIL }],
-        subject: subject || "Nouveau message via le site",
+        subject: subjectLine,
         htmlContent: `
-          <h3>Message reçu via le site Espace Trinité</h3>
+          <h3>Nouvelle demande via le site Espace Trinité</h3>
           <p><strong>Nom :</strong> ${name}</p>
           <p><strong>Email :</strong> ${email}</p>
-          <p><strong>Sujet :</strong> ${subject}</p>
+          ${phone  ? `<p><strong>Téléphone :</strong> ${phone}</p>` : ""}
+          ${salle  ? `<p><strong>Salle souhaitée :</strong> ${salle}</p>` : ""}
+          ${date   ? `<p><strong>Date souhaitée :</strong> ${date}</p>` : ""}
+          ${guests ? `<p><strong>Nombre de participants :</strong> ${guests}</p>` : ""}
           <p><strong>Message :</strong><br>${message.replace(/\n/g, "<br>")}</p>
         `
       },

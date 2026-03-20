@@ -57,7 +57,6 @@
   <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
   <script src="js/header.js" defer></script>
   <script src="js/galerie.js" defer></script>
-  <script src="js/assistant_dynamic.js"></script>
   <script src="js/script.js" defer></script>
   <script src="js/tarifs_dynamic_loader.js"></script>
 
@@ -208,7 +207,7 @@
             À partir de <strong>405&nbsp;€</strong><br>
             <span class="petit">/ demi-journée</span>
           </div>
-          <button class="assistant-toggle">Demander un devis</button>
+          <button class="btn btn-scroll-contact">Demander un devis</button>
           <div class="gratuit">Devis gratuit</div>
         </div>
 
@@ -586,7 +585,7 @@
         ===================================================== -->
 
         <div class="btn-wrapper">
-          <button class="btn assistant-toggle" aria-label="Demander un devis pour une salle">Demander un devis</button>
+          <button class="btn btn-scroll-contact" aria-label="Demander un devis pour une salle">Demander un devis</button>
         </div>
       </div>
     </section>
@@ -660,102 +659,74 @@
   <section id="contact" class="section-contact">
     <div class="container">
       <h2>CONTACT</h2>
-      <p class="intro">Une question, une demande particulière ? Écrivez-nous, nous vous répondrons rapidement.</p>
-  
-      <form id="contact-form" class="contact-form" method="POST">
+      <p class="intro">Une question, une demande de réservation ? Remplissez le formulaire, nous vous répondrons rapidement.</p>
+
+      <form id="contact-form" class="contact-form" method="POST" novalidate>
+
+        <!-- Ligne 1 : identité -->
         <div class="form-grid">
-          <input type="text" name="name" placeholder="Votre nom" required>
-          <input type="email" name="email" placeholder="Votre email" required>
+          <div class="form-field">
+            <label for="contact-name">Nom <span aria-hidden="true">*</span></label>
+            <input type="text" id="contact-name" name="name" placeholder="Jean Dupont" required>
+          </div>
+          <div class="form-field">
+            <label for="contact-email">Email <span aria-hidden="true">*</span></label>
+            <input type="email" id="contact-email" name="email" placeholder="jean.dupont@example.com" required>
+          </div>
+          <div class="form-field">
+            <label for="contact-phone">Téléphone</label>
+            <input type="tel" id="contact-phone" name="phone" placeholder="06 00 00 00 00">
+          </div>
         </div>
-        <input type="text" name="subject" placeholder="Objet" required>
-        <textarea name="message" id="contact-message" placeholder="Votre message..." rows="6" required></textarea>
-  
-        <!-- ✅ CAPTCHA Turnstile -->
+
+        <!-- Ligne 2 : réservation -->
+        <div class="form-grid form-grid-3">
+          <div class="form-field">
+            <label for="contact-salle">Salle souhaitée</label>
+            <select id="contact-salle" name="salle">
+              <option value="">— À définir —</option>
+              <option value="Pierre Goursat">Pierre Goursat (70 m², jusqu'à 25 pers.)</option>
+              <option value="d'Estienne d'Orves">d'Estienne d'Orves (35 m², jusqu'à 20 pers.)</option>
+              <option value="Messiaen">Messiaen (80 m², jusqu'à 65 pers.)</option>
+              <option value="La Bruyère">La Bruyère (70 m², jusqu'à 50 pers.)</option>
+              <option value="Plusieurs salles">Plusieurs salles</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="contact-date">Date souhaitée</label>
+            <input type="date" id="contact-date" name="date">
+          </div>
+          <div class="form-field">
+            <label for="contact-guests">Nombre de participants</label>
+            <input type="number" id="contact-guests" name="guests" placeholder="ex. 20" min="1" max="200">
+          </div>
+        </div>
+
+        <!-- Ligne 3 : message -->
+        <div class="form-field">
+          <label for="contact-message">Message <span aria-hidden="true">*</span></label>
+          <textarea id="contact-message" name="message" placeholder="Décrivez votre projet, vos besoins, vos questions…" rows="5" required></textarea>
+        </div>
+
+        <!-- Feedback inline -->
+        <div id="form-feedback" class="form-feedback" aria-live="polite" hidden></div>
+
+        <!-- CAPTCHA Turnstile -->
         <div class="cf-turnstile"
              data-sitekey="0x4AAAAAABlRgIwfZESu1eSO"
              data-theme="light"
-             data-size="normal"
-             style="margin: 0 auto;">
+             data-size="normal">
         </div>
 
-  
-        <button class="btn" type="submit">Envoyer le message</button>
+        <button class="btn" type="submit">Envoyer la demande</button>
       </form>
     </div>
   </section>
 
-  <!-- =====================================================
-  =               SECTION : FORMULAIRE ASSISTANT         =
-  ===================================================== -->
-
-  <section id="assistant-overlay" aria-label="Assistant de choix de salle">
-    <div id="assistant-box">
-      <div id="assistant-modal" role="dialog" aria-modal="true" aria-labelledby="assistant-title">
-        <h3 id="assistant-title">Trouvez votre salle idéale</h3>
-        <form id="assistant-form">
-          <fieldset>
-            <legend class="visually-hidden">Formulaire de sélection de salle</legend>
-
-            <div class="form-row">
-              <label for="eventType">Type d'événement</label>
-              <select id="eventType" name="eventType" required>
-                <option value="" disabled selected>Type d'événement</option>
-                <option value="reunion">Réunion (configuration en U)</option>
-                <option value="conference">Conférence</option>
-                <option value="classe">Salle de classe</option>
-                <option value="autre">Autre</option>
-              </select>
-            </div>
-
-            <div class="form-row">
-              <label for="participants">Nombre de participants</label>
-              <input
-                type="number"
-                id="participants"
-                name="participants"
-                min="1"
-                max="65"
-                placeholder="Entrez un nombre"
-                required
-              />
-            </div>
-
-            <div class="form-row">
-              <label for="duration">Durée</label>
-              <select id="duration" name="duration" required>
-                <option value="" disabled selected>Durée</option>
-                <option value="demi">Demi-journée</option>
-                <option value="journee">Journée</option>
-                <option value="horaire">Horaire</option>
-              </select>
-            </div>
-
-            <div class="form-row">
-              <label for="dateStart">Date souhaitée (début)</label>
-              <input type="date" id="dateStart" name="dateStart" aria-required="false">
-            </div>
-
-            <div class="form-row">
-              <label for="dateEnd">Date souhaitée (fin)</label>
-              <input type="date" id="dateEnd" name="dateEnd" aria-required="false">
-            </div>
-
-            <div class="form-checkbox">
-              <input type="checkbox" id="pmr" name="pmr">
-              <label for="pmr">Accessible PMR</label>
-            </div>
-          </fieldset>
-        </form>
-
-        <div id="assistant-result" style="display:none;" aria-live="polite"></div>
-
-        <div class="actions">
-          <button class="btn btn-secondary" id="assistant-cancel" title="Fermer l’assistant">Annuler</button>
-          <button class="btn btn-primary" id="assistant-submit" title="Afficher la salle recommandée">Voir la recommandation</button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Bouton flottant Réserver -->
+  <button class="btn btn-float" id="btn-reserv-float" aria-label="Faire une demande de réservation">
+    Réserver
+  </button>
 
   <!-- =====================================================
   =                     FOOTER                           =
