@@ -37,9 +37,7 @@ Ce fichier contient les prix à jour pour chaque salle, au format :
 | Salle Messiaen             | 740         | 540              | 190               |
 | Salle La Bruyère           | 800         | 580              | 200               |
 
-Ces données alimentent :
-- la section **Tarifs** de la page d’accueil (grille responsive),
-- le **mini-assistant** d’aide à la réservation.
+Ces données alimentent la section **Tarifs** de la page d’accueil (grille responsive).
 
 > ✅ Plus besoin de modifier le code pour ajuster les prix : une mise à jour du fichier `.xlsx` suffit.
 
@@ -96,9 +94,10 @@ force = true
 
 ---
 
-## ✉️ Formulaire de contact sécurisé
+## ✉️ Formulaire de contact
 
-Le formulaire est protégé contre les spams via [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/), et les messages sont transmis via l’API de [Brevo](https://www.brevo.com/fr/).
+Champs : nom, email, téléphone, salle souhaitée, date, nombre de participants, message (auto-extensible).
+Protégé par [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/), envoi via [Brevo](https://www.brevo.com/fr/). Feedback inline (pas d’`alert()`).
 
 ### 🔒 Variables d’environnement Netlify requises
 
@@ -131,12 +130,11 @@ espacetrinite/
 │   └── header.css                # Style spécifique à l'en-tête
 │
 ├── js/
-│   ├── mail.js                   # Gestion du formulaire et validation CAPTCHA
+│   ├── mail.js                   # Formulaire de contact : validation CAPTCHA, envoi, feedback inline
 │   ├── header.js                 # Animation du menu sticky
-│   ├── galerie.js                # Gestion des galeries par salle
-│   ├── consent.js                # Gestion unifiée : bandeau cookies + carte Maps
-│   ├── assistant_dynamic.js      # Assistant de recherche de salle avec tarifs dynamiques
-│   └── tarifs_dynamic_loader.js  # Chargement dynamique des tarifs depuis un fichier Excel
+│   ├── galerie.js                # Galerie photo par salle (masonry + zoom)
+│   ├── consent.js                # Bandeau cookies + consentement carte Maps
+│   └── tarifs_dynamic_loader.js  # Chargement dynamique des tarifs depuis Excel
 │
 ├── netlify/
 │   └── functions/
