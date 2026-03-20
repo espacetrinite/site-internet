@@ -1004,60 +1004,53 @@ section h2 {
 .gallery-slide{
   display:none;
   flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  min-height:100vh;
+  padding: 10px 0 40px;
 }
 
-.gallery-slide.active{ display:flex; }
+.gallery-slide.active{ display:block; }
 
 /* ====================================================
-   MOSAÏQUE
+   MOSAÏQUE – MASONRY COLONNES
 ==================================================== */
 .gallery-mosaic{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:15px;
+  columns: 3;
+  column-gap: 10px;
 }
 
 .grid-item{
-  position:relative;
-  overflow:hidden;
-  border:3px solid var(--c-blanc);          /* valeur par défaut */
+  break-inside: avoid;
+  margin-bottom: 10px;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .grid-item img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .4s ease;
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform .4s ease, opacity .3s ease;
 }
 
-.grid-item:hover img{ transform:scale(1.05); }
-
-.grid-item.wide { grid-column:span 2; }
-.grid-item.tall { grid-row:span 2;   }
-.grid-item.large{ grid-column:span 2; grid-row:span 2; }
-
-/* --- Bordures colorées selon la salle (hérite du slide) --- */
-.gallery-slide.rouge .grid-item { border-color: var(--c-rouge); }
-.gallery-slide.bleu  .grid-item { border-color: var(--c-bleu);  }
-.gallery-slide.jaune .grid-item { border-color: var(--c-jaune); }
-.gallery-slide.vert  .grid-item { border-color: var(--c-vert);  }
+.grid-item:hover img{
+  transform: scale(1.03);
+  opacity: .88;
+}
 
 /* ====================================================
-   RESPONSIVE ≤ 768 px
+   RESPONSIVE ≤ 900 px
 ==================================================== */
-@media (max-width:768px){
+@media (max-width:900px){
+  .gallery-mosaic{ columns: 2; column-gap: 8px; }
+  .grid-item{ margin-bottom: 8px; }
+}
+
+@media (max-width:600px){
   .gallery-nav button{
-    font-size:.9rem;
-    padding:6px 12px;
+    font-size:.85rem;
+    padding:6px 10px;
   }
-  .gallery-mosaic{
-    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-    gap:12px;
-  }
+  .gallery-mosaic{ columns: 2; column-gap: 6px; }
+  .grid-item{ margin-bottom: 6px; }
 }
 
 /* ====================================================
@@ -1065,13 +1058,28 @@ section h2 {
 ==================================================== */
 #zoom-viewer{
   position:fixed;inset:0;
-  background:rgba(0,0,0,.9);
+  background:rgba(0,0,0,.92);
   display:flex;align-items:center;justify-content:center;
   z-index:9999;
+  cursor: zoom-out;
 }
 #zoom-viewer img{
-  max-width:90%;max-height:90%;
+  max-width:88%;max-height:88vh;
+  object-fit:contain;
+  box-shadow: 0 8px 40px rgba(0,0,0,.6);
+  cursor: default;
 }
+
+/* Bouton fermer */
+.zoom-close{
+  position:absolute;top:18px;right:24px;
+  font-size:2rem;color:var(--c-blanc);
+  cursor:pointer;user-select:none;
+  line-height:1;opacity:.8;
+  transition:opacity .2s;
+  background:none;border:none;padding:4px 8px;
+}
+.zoom-close:hover{ opacity:1; }
 
 /* Flèches navigation */
 .zoom-arrow{
@@ -1080,6 +1088,7 @@ section h2 {
   cursor:pointer;user-select:none;
   padding:0 18px;line-height:1;
   transition:opacity .25s;
+  background:none;border:none;
 }
 .zoom-arrow:hover{ opacity:.7; }
 .zoom-prev{ left:15px; }
