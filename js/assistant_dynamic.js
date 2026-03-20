@@ -198,17 +198,25 @@ document.addEventListener("DOMContentLoaded", () => {
         "Merci d’avance."
       ].filter(Boolean).join("\n");
 
-      const contactSection = document.getElementById("contact");
-      const subjectField   = contactSection?.querySelector('input[placeholder*="Objet"], #contact-subject');
-      const messageField   = contactSection?.querySelector('textarea, #contact-message');
+      // Pré-remplissage des nouveaux champs du formulaire
+      const salleSelect  = document.getElementById("contact-salle");
+      const dateField    = document.getElementById("contact-date");
+      const guestsField  = document.getElementById("contact-guests");
+      const messageField = document.getElementById("contact-message");
 
-      if (subjectField && messageField) {
-        subjectField.value = "Demande de devis";
-        messageField.value = lignes;
+      if (salleSelect) {
+        // cherche l’option dont le texte contient le nom de la salle recommandée
+        const option = Array.from(salleSelect.options).find(o =>
+          o.value.toLowerCase().includes(best.name.split(" ").pop().toLowerCase())
+        );
+        if (option) salleSelect.value = option.value;
       }
+      if (dateField && dateStart) dateField.value = dateStart;
+      if (guestsField) guestsField.value = nb;
+      if (messageField) messageField.value = lignes;
 
-      closeAssistant();                                   // ta fonction existante
-      setTimeout(() => contactSection?.scrollIntoView({ behavior: "smooth" }), 50);
+      closeAssistant();
+      setTimeout(() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }), 50);
     }, { once: true });
   });
 });

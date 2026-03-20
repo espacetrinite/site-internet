@@ -1369,21 +1369,45 @@ section h2 {
 }
 
 .form-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
-.form-grid input {
-  flex: 1;
-  min-width: 250px;
-  height: 52px;
+.form-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #111;
+}
+
+.form-field label span {
+  color: #b22222;
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-  .form-grid {
-    flex-direction: column;
+@media (max-width: 768px) {
+  .form-grid,
+  .form-grid-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .form-grid,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1391,7 +1415,8 @@ section h2 {
    CHAMPS
 ================================ */
 .contact-form input,
-.contact-form textarea {
+.contact-form textarea,
+.contact-form select {
   padding: 14px;
   border: 3px solid black;
   background: white;
@@ -1402,15 +1427,26 @@ section h2 {
   width: 100%;
   box-sizing: border-box;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  appearance: none;
+}
+
+.contact-form select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23000' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
 }
 
 .contact-form textarea {
-  min-height: 300px;
-  resize: vertical;
+  min-height: 150px;
+  resize: none;
+  overflow: hidden;
 }
 
 .contact-form input::placeholder,
-.contact-form textarea::placeholder {
+.contact-form textarea::placeholder,
+.contact-form select::placeholder {
   color: #888;
   opacity: 1;
 }
@@ -1419,7 +1455,8 @@ section h2 {
    FOCUS
 ================================ */
 .contact-form input:focus,
-.contact-form textarea:focus {
+.contact-form textarea:focus,
+.contact-form select:focus {
   border-color: black;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15); /* glow noir doux */
   outline: none;
@@ -1431,6 +1468,46 @@ section h2 {
 ================================ */
 .contact-form button {
   align-self: center;
+}
+
+/* ================================
+   FEEDBACK INLINE
+================================ */
+.form-feedback {
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-left: 4px solid;
+}
+
+.form-feedback.success {
+  background: #f0faf4;
+  border-color: #00a859;
+  color: #00653a;
+}
+
+.form-feedback.error {
+  background: #fff4f4;
+  border-color: #b22222;
+  color: #b22222;
+}
+
+/* ================================
+   BOUTON FLOTTANT RÉSERVER
+================================ */
+.btn-float {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 900;
+  box-shadow: 0 4px 20px rgba(0,0,0,.35);
+}
+
+@media (max-width: 600px) {
+  .btn-float {
+    bottom: 18px;
+    right: 18px;
+  }
 }
 
 /* ===========================================================
