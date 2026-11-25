@@ -1,6 +1,6 @@
-const axios = require("axios");
+import axios from "axios";
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
